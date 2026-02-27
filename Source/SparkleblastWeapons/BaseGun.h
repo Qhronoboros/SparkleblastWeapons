@@ -8,7 +8,7 @@
 #include "BaseGun.generated.h"
 
 UCLASS()
-class SPARKLEBLASTWEAPONS_API ABaseGun : public AActor, public UWeapon
+class SPARKLEBLASTWEAPONS_API ABaseGun : public AActor
 {
 	GENERATED_BODY()
 	
