@@ -72,3 +72,18 @@ Plugins/**/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# Ignore Plugin Junk
+Plugins/VisualStudioTools/Docs/*
+
+/Plugins/VisualStudioTools/Docs
+
+/.idea
+
+# Unnecessary FMOD plugin files
+Plugins/FMODStudio/Docs
+Plugins/FMODStudio/Resources
+
+# Don't ignore certain FMOD plugin binaries
+!Plugins/FMODStudio/Binaries/**
+Plugins/FMODStudio/Binaries/**/UnrealEditor*
