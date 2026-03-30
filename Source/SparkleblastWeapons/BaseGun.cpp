@@ -22,6 +22,24 @@ void ABaseGun::BeginPlay()
 void ABaseGun::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+TSubclassOf<UUserWidget> ABaseGun::GetCrosshair_Implementation()
+{
+	return TSubclassOf<UUserWidget>();
+}
+
+void ABaseGun::StartAttacking_Implementation(USceneComponent* OwnerLook, AActor* OwnerShooter)
+{
 
 }
 
+void ABaseGun::StopAttacking_Implementation()
+{
+
+}
+
+void ABaseGun::Attack_Implementation(FTransform OwnerLookTransform)
+{
+
+}

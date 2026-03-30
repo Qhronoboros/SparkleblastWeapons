@@ -8,7 +8,7 @@ public class SparkleblastWeapons : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "EnhancedInput", "FMODStudio" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "EnhancedInput", "FMODStudio", "AIModule" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

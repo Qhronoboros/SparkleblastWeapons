@@ -8,7 +8,7 @@
 #include "BaseGun.generated.h"
 
 UCLASS()
-class SPARKLEBLASTWEAPONS_API ABaseGun : public AActor
+class SPARKLEBLASTWEAPONS_API ABaseGun : public AActor, public IWeapon
 {
 	GENERATED_BODY()
 	
@@ -24,4 +24,15 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable)
+	TSubclassOf<UUserWidget> GetCrosshair_Implementation();
+
+	UFUNCTION(BlueprintCallable)
+	void StartAttacking_Implementation(USceneComponent* OwnerLook, AActor* OwnerShooter);
+
+	UFUNCTION(BlueprintCallable)
+	void StopAttacking_Implementation();
+
+	UFUNCTION(BlueprintCallable)
+	void Attack_Implementation(FTransform OwnerLookTransform);
 };
