@@ -4,6 +4,8 @@
 #include "GunTestActor.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AGunTestActor::AGunTestActor()
@@ -23,17 +25,54 @@ bool AGunTestActor::SetupBlackboard(UBlackboardComponent* BlackboardComponent)
 	if (IsValid(BlackboardComponent))
 	{
 		Blackboard = BlackboardComponent;
+		Blackboard->SetValueAsObject(FName("SelfActor"), this);
 		NodeTree->SetupBlackboard(BlackboardComponent);
+		IsBlackboardSet = true;
 		return true;
 	}
 
 	return false;
 }
 
-// Called every frame
 void AGunTestActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (!TriggerHeld || !IsBlackboardSet) return;
+
+	float GameTime = UGameplayStatics::GetTimeSeconds(GetWorld());
+
+	Blackboard->SetValueAsFloat(FName("GameTime"), GameTime);
+
+	Blackboard->SetValueAsVector(FName("MuzzleLocation"), GetActorLocation());
+	Blackboard->SetValueAsVector(FName("MuzzleDirection"), GetActorForwardVector());
+
+	Blackboard->SetValueAsFloat(FName("Cooldown"), 1.0f /
+			FMath::Max(FireRateCurve->GetFloatValue(GameTime - TimeStarted), 0.0f));
+
+	// Set HeadLocation, HeadDirection, MuzzleLocation, and MuzzleDirection
+
+	NodeTree->Process();
+}
+
+TSubclassOf<UUserWidget> AGunTestActor::GetCrosshair()
+{
+	return TSubclassOf<UUserWidget>();
+}
+
+void AGunTestActor::StartAttacking(USceneComponent* OwnerLook, AActor* OwnerShooter)
+{
+	TimeStarted = UGameplayStatics::GetTimeSeconds(GetWorld());
+	TriggerHeld = true;
+}
+
+void AGunTestActor::StopAttacking()
+{
+	TriggerHeld = false;
+}
+
+void AGunTestActor::Attack(FTransform OwnerLookTransform)
+{
 
 }
 

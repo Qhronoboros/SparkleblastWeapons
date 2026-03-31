@@ -23,8 +23,11 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere)
-	float Duration;
+	FString DurationBlackboardKey;
+
+	UPROPERTY(EditAnywhere)
+	float DefaultDuration;
 
 	UPROPERTY(VisibleAnywhere)
-	double TimeStarted = 0.0;
+	float TimeStarted = 0.0;
 };

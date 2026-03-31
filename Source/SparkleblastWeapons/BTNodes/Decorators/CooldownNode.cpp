@@ -3,7 +3,6 @@
 
 #include "CooldownNode.h"
 #include "BehaviorTree/BlackboardComponent.h"
-#include "Kismet/GameplayStatics.h"
 
 void UCooldownNode::SetupBlackboard(UBlackboardComponent* NewBlackboard)
 {
@@ -20,7 +19,10 @@ void UCooldownNode::Reset()
 NodeStatus UCooldownNode::Update()
 {
 	float GameTime = Blackboard->GetValueAsFloat(FName("GameTime"));
-	if (GameTime - TimeStarted >= Duration)
+	float ActualDuration = DurationBlackboardKey == "" ?
+		DefaultDuration : Blackboard->GetValueAsFloat(FName(DurationBlackboardKey));
+
+	if (GameTime - TimeStarted >= ActualDuration)
 	{
 		TimeStarted = GameTime;
 		return Child->Process();

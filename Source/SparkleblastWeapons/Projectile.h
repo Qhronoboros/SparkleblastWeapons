@@ -23,5 +23,5 @@ class SPARKLEBLASTWEAPONS_API IProjectile
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void Constructor(float AttackDamage, float Speed, bool Piercing, AActor* Shooter, USceneComponent* ShooterLook);
+	void Constructor(float AttackDamage, float Speed, bool Piercing, AActor* Shooter);
 };

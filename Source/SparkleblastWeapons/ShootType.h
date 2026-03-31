@@ -21,7 +21,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float MaxDistance;
 
-
 public:	
 	UFUNCTION()
 	bool GetLineTraceHit(FVector location, FVector direction, ECollisionChannel TraceChannel, FHitResult& hit, float DebugLineDuration);
