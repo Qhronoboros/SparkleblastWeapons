@@ -4,12 +4,6 @@
 #include "CooldownNode.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
-void UCooldownNode::SetupBlackboard(UBlackboardComponent* NewBlackboard)
-{
-	Blackboard = NewBlackboard;
-	Child->SetupBlackboard(NewBlackboard);
-}
-
 void UCooldownNode::Reset()
 {
 	TimeStarted = 0.0f;

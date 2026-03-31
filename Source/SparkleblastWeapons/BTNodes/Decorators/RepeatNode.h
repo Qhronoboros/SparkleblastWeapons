@@ -4,29 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "DecoratorNode.h"
-#include "CooldownNode.generated.h"
+#include "RepeatNode.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class SPARKLEBLASTWEAPONS_API UCooldownNode : public UDecoratorNode
+class SPARKLEBLASTWEAPONS_API URepeatNode : public UDecoratorNode
 {
 	GENERATED_BODY()
-	
-public:
-	virtual void Reset() override;
 
 protected:
 	virtual NodeStatus Update() override;
 
 private:
 	UPROPERTY(EditAnywhere)
-	FString DurationBlackboardKey;
+	FString RepeatBlackboardKey;
 
 	UPROPERTY(EditAnywhere)
-	float DefaultDuration;
-
-	UPROPERTY(VisibleAnywhere)
-	float TimeStarted = 0.0;
+	float DefaultRepeat;
 };

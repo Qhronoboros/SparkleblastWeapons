@@ -13,12 +13,32 @@
 class UBlackboardComponent;
 class UBlackboardData;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTestSignature, FString, Test, FString, Test2);
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTestSignature, FString, Test, FString, Test2);
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTestSignature, FString, Test, FString, Test2);
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTestSignature, FString, Test, FString, Test2);
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTestSignature, FString, Test, FString, Test2);
+
 UCLASS()
 class SPARKLEBLASTWEAPONS_API AGunTestActor : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
+	UPROPERTY(BlueprintAssignable, EditAnywhere)
+	FTestSignature OnFireHeld;
+	
+	UPROPERTY(BlueprintAssignable, EditAnywhere)
+	FTestSignature OnFireReleased;
+
+	UPROPERTY(BlueprintAssignable, EditAnywhere)
+	FTestSignature OnGunFired;
+	
+	UPROPERTY(BlueprintAssignable, EditAnywhere)
+	FTestSignature OnBulletFired;
+
+	UPROPERTY(BlueprintAssignable, EditAnywhere)
+	FTestSignature OnBulletHit;
 
 	// Sets default values for this actor's properties
 	AGunTestActor();
@@ -61,7 +81,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable)
-	bool SetupBlackboard(UBlackboardComponent* BlackboardComponent);
+	bool SetupBlackboard(UBlackboardComponent* BlackboardComponent, AActor* Shooter);
 
 	bool IsBlackboardSet = false;
 	bool TriggerHeld = false;

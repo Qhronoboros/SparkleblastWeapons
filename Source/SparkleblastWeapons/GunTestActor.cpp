@@ -20,12 +20,13 @@ void AGunTestActor::BeginPlay()
 	Super::BeginPlay();
 }
 
-bool AGunTestActor::SetupBlackboard(UBlackboardComponent* BlackboardComponent)
+bool AGunTestActor::SetupBlackboard(UBlackboardComponent* BlackboardComponent, AActor* Shooter)
 {
 	if (IsValid(BlackboardComponent))
 	{
 		Blackboard = BlackboardComponent;
-		Blackboard->SetValueAsObject(FName("SelfActor"), this);
+		Blackboard->SetValueAsObject(FName("SelfWeapon"), this);
+		Blackboard->SetValueAsObject(FName("Shooter"), Shooter);
 		NodeTree->SetupBlackboard(BlackboardComponent);
 		IsBlackboardSet = true;
 		return true;
@@ -52,7 +53,13 @@ void AGunTestActor::Tick(float DeltaTime)
 
 	// Set HeadLocation, HeadDirection, MuzzleLocation, and MuzzleDirection
 
-	NodeTree->Process();
+	int BulletAmount = Blackboard->GetValueAsInt(FName("BulletAmount"));
+
+	for (int i = 0; i < BulletAmount; i++)
+	{
+		//NodeTree->Process();
+		if (NodeTree->Process() != NodeStatus::Success) break;
+	}
 }
 
 TSubclassOf<UUserWidget> AGunTestActor::GetCrosshair()

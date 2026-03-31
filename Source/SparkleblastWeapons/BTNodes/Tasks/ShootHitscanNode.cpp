@@ -8,10 +8,7 @@
 
 NodeStatus UShootHitscanNode::Update()
 {
-	// Set Default Latest Impact Point using Max Distance
-
 	// Multi Line Trace Hitscan
-
 	UWorld* World = Blackboard->GetValueAsObject(FName("SelfActor"))->GetWorld();
 	FVector StartLocation = Blackboard->GetValueAsVector(FName("ShootLocation"));
 	FVector Direction = Blackboard->GetValueAsVector(FName("ShootDirection"));
