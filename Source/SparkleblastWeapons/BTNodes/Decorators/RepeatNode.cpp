@@ -6,7 +6,7 @@
 
 NodeStatus URepeatNode::Update()
 {
-	float ActualRepeat = RepeatBlackboardKey == "" ?
+	int ActualRepeat = RepeatBlackboardKey == "" ?
 		DefaultRepeat : Blackboard->GetValueAsInt(FName(RepeatBlackboardKey));
 
 	for (int i = 0; i < ActualRepeat; i++)

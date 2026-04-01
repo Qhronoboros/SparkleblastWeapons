@@ -7,38 +7,39 @@
 //#include "Runtime/AIModule/Classes/AIController.h"
 #include "Weapon.h"
 #include "FMODEvent.h"
+#include "DelegateContainers/DelegateContainerNone.h"
+#include "DelegateContainers/DelegateContainerVecVec.h"
+#include "DelegateContainers/DelegateContainerActorVec.h"
 #include "GameFramework/Actor.h"
 #include "GunTestActor.generated.h"
 
 class UBlackboardComponent;
 class UBlackboardData;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTestSignature, FString, Test, FString, Test2);
-//DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTestSignature, FString, Test, FString, Test2);
-//DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTestSignature, FString, Test, FString, Test2);
-//DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTestSignature, FString, Test, FString, Test2);
-//DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTestSignature, FString, Test, FString, Test2);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDelegateMultiNone);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnDelegateMultiVecVec, FVector, Vec1, FVector, Vec2);
 
 UCLASS()
 class SPARKLEBLASTWEAPONS_API AGunTestActor : public AActor
 {
 	GENERATED_BODY()
 	
-public:	
-	UPROPERTY(BlueprintAssignable, EditAnywhere)
-	FTestSignature OnFireHeld;
+public:
+	// Delegates
+	UPROPERTY(BlueprintAssignable)
+	FOnDelegateMultiNone OnFireHeld;
 	
-	UPROPERTY(BlueprintAssignable, EditAnywhere)
-	FTestSignature OnFireReleased;
+	UPROPERTY(BlueprintAssignable)
+	FOnDelegateMultiNone OnFireReleased;
 
-	UPROPERTY(BlueprintAssignable, EditAnywhere)
-	FTestSignature OnGunFired;
-	
-	UPROPERTY(BlueprintAssignable, EditAnywhere)
-	FTestSignature OnBulletFired;
+	UPROPERTY(BlueprintAssignable)
+	FOnDelegateMultiVecVec OnGunFired;
 
-	UPROPERTY(BlueprintAssignable, EditAnywhere)
-	FTestSignature OnBulletHit;
+	UPROPERTY(BlueprintReadOnly)
+	UDelegateContainerVecVec* OnBulletFired;
+
+	UPROPERTY(BlueprintReadOnly)
+	UDelegateContainerActorVec* OnBulletHit;
 
 	// Sets default values for this actor's properties
 	AGunTestActor();

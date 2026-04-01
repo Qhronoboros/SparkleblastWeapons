@@ -21,6 +21,6 @@ NodeStatus UCooldownNode::Update()
 		TimeStarted = GameTime;
 		return Child->Process();
 	}
-
+	
 	return NodeStatus::Running;
 }

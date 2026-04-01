@@ -7,7 +7,7 @@
 
 NodeStatus UBulletTransformCalcAccurateNode::Update()
 {
-	UWorld* World = Blackboard->GetValueAsObject(FName("SelfActor"))->GetWorld();
+	UWorld* World = Blackboard->GetValueAsObject(FName("SelfWeapon"))->GetWorld();
 	float MaxDistance = Blackboard->GetValueAsFloat(FName("MaxShootDistance"));
 	FVector HeadLocation = Blackboard->GetValueAsVector(FName("HeadLocation"));
 	FVector HeadDirection = Blackboard->GetValueAsVector(FName("HeadDirection"));

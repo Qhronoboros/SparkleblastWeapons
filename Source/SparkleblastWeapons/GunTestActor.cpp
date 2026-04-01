@@ -27,6 +27,13 @@ bool AGunTestActor::SetupBlackboard(UBlackboardComponent* BlackboardComponent, A
 		Blackboard = BlackboardComponent;
 		Blackboard->SetValueAsObject(FName("SelfWeapon"), this);
 		Blackboard->SetValueAsObject(FName("Shooter"), Shooter);
+
+		OnBulletFired = NewObject<UDelegateContainerVecVec>();
+		Blackboard->SetValueAsObject(FName("OnBulletFired"), OnBulletFired);
+
+		OnBulletHit = NewObject<UDelegateContainerActorVec>();
+		Blackboard->SetValueAsObject(FName("OnBulletHit"), OnBulletHit);
+
 		NodeTree->SetupBlackboard(BlackboardComponent);
 		IsBlackboardSet = true;
 		return true;
@@ -53,12 +60,9 @@ void AGunTestActor::Tick(float DeltaTime)
 
 	// Set HeadLocation, HeadDirection, MuzzleLocation, and MuzzleDirection
 
-	int BulletAmount = Blackboard->GetValueAsInt(FName("BulletAmount"));
-
-	for (int i = 0; i < BulletAmount; i++)
+	if (NodeTree->Process() == NodeStatus::Success)
 	{
-		//NodeTree->Process();
-		if (NodeTree->Process() != NodeStatus::Success) break;
+		// OnGunFired
 	}
 }
 

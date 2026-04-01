@@ -22,5 +22,5 @@ private:
 	FString RepeatBlackboardKey;
 
 	UPROPERTY(EditAnywhere)
-	float DefaultRepeat;
+	int DefaultRepeat;
 };

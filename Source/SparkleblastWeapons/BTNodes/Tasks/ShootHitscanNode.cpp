@@ -3,13 +3,15 @@
 
 #include "ShootHitscanNode.h"
 #include "../../Health.h"
+#include "../../DelegateContainers/DelegateContainerVecVec.h"
+#include "../../DelegateContainers/DelegateContainerActorVec.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 NodeStatus UShootHitscanNode::Update()
 {
 	// Multi Line Trace Hitscan
-	UWorld* World = Blackboard->GetValueAsObject(FName("SelfActor"))->GetWorld();
+	UWorld* World = Blackboard->GetValueAsObject(FName("SelfWeapon"))->GetWorld();
 	FVector StartLocation = Blackboard->GetValueAsVector(FName("ShootLocation"));
 	FVector Direction = Blackboard->GetValueAsVector(FName("ShootDirection"));
 
@@ -40,15 +42,25 @@ NodeStatus UShootHitscanNode::Update()
 		LatestImpactPoint = Hit.ImpactPoint;
 
 		// Deal Damage
+		AActor* actor = Cast<AActor>(Blackboard->GetValueAsObject(FName("Shooter")));
 		UHealth* HealthComponent = HitActor->GetComponentByClass<UHealth>();
 		if (HealthComponent)
 		{
-			AActor* actor = Cast<AActor>(Blackboard->GetValueAsObject(FName("SelfActor")));
 			HealthComponent->DealDamage(actor, Damage);
 		}
 
-		// Bullet Hit Callback
+		// Callbacks
+		UDelegateContainerVecVec* BulletFired = Cast<UDelegateContainerVecVec>(Blackboard->GetValueAsObject(FName("OnBulletFired")));
+		if (BulletFired)
+		{
+			BulletFired->ExecuteDelegates(StartLocation, Direction);
+		}
 
+		UDelegateContainerActorVec* BulletHit = Cast<UDelegateContainerActorVec>(Blackboard->GetValueAsObject(FName("OnBulletHit")));
+		if (BulletHit)
+		{
+			BulletHit->ExecuteDelegates(actor, LatestImpactPoint);
+		}
 		
 		if (PrintHitscan)
 		{

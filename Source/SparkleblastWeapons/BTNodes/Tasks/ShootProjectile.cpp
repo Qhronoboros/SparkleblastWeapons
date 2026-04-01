@@ -3,6 +3,7 @@
 
 #include "ShootProjectile.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "../../DelegateContainers/DelegateContainerVecVec.h"
 
 NodeStatus UShootProjectile::Update()
 {
@@ -15,15 +16,15 @@ NodeStatus UShootProjectile::Update()
 	FActorSpawnParameters spawnParams;
 	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	
-	UWorld* World = Blackboard->GetValueAsObject(FName("SelfActor"))->GetWorld();
+	UWorld* World = Blackboard->GetValueAsObject(FName("SelfWeapon"))->GetWorld();
 	FVector StartLocation = Blackboard->GetValueAsVector(FName("ShootLocation"));
 	FVector Direction = Blackboard->GetValueAsVector(FName("ShootDirection"));
 	
 	ABaseProjectile* SpawnedProjectile = World->SpawnActor<ABaseProjectile>(Projectile, StartLocation, Direction.Rotation(), spawnParams);
 
-	AActor* actor = Cast<AActor>(Blackboard->GetValueAsObject(FName("SelfActor")));
+	AActor* Shooter = Cast<AActor>(Blackboard->GetValueAsObject(FName("Shooter")));
 
-	if (!actor)
+	if (!Shooter)
 	{
 		return NodeStatus::Failed;
 	}
@@ -32,6 +33,14 @@ NodeStatus UShootProjectile::Update()
 	float Speed = Blackboard->GetValueAsFloat(FName("ProjectileSpeed"));
 	bool Piercing = Blackboard->GetValueAsBool(FName("Piercing"));
 
-	SpawnedProjectile->Constructor(Damage, Speed, Piercing, actor);
+	SpawnedProjectile->Constructor(Damage, Speed, Piercing, Shooter);
+
+	// Callback
+	UDelegateContainerVecVec* BulletFired = Cast<UDelegateContainerVecVec>(Blackboard->GetValueAsObject(FName("OnBulletFired")));
+	if (BulletFired)
+	{
+		BulletFired->ExecuteDelegates(StartLocation, Direction);
+	}
+
 	return NodeStatus::Success;
 }

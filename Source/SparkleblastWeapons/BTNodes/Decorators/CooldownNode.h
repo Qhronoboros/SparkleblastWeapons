@@ -6,6 +6,7 @@
 #include "DecoratorNode.h"
 #include "CooldownNode.generated.h"
 
+//class FBlackboardKeySelector;
 /**
  * 
  */
