@@ -18,4 +18,8 @@ protected:
 	virtual NodeStatus Update() override;
 
 	bool GetLineTraceHit(UWorld* World, FVector location, FVector direction, float MaxDistance, FHitResult& hit);
+
+private:
+	UPROPERTY(EditAnywhere)
+	float BulletSpread;
 };

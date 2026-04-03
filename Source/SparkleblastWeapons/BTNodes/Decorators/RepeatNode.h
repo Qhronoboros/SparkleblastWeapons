@@ -18,9 +18,9 @@ protected:
 	virtual NodeStatus Update() override;
 
 private:
-	UPROPERTY(EditAnywhere)
-	FString RepeatBlackboardKey;
+	//UPROPERTY(EditAnywhere)
+	//FString RepeatBlackboardKey;
 
 	UPROPERTY(EditAnywhere)
-	int DefaultRepeat;
+	int RepeatAmount;
 };

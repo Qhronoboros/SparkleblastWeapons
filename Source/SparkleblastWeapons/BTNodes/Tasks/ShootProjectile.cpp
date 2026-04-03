@@ -29,8 +29,8 @@ NodeStatus UShootProjectile::Update()
 		return NodeStatus::Failed;
 	}
 
-	float Damage = Blackboard->GetValueAsFloat(FName("BulletDamage"));
-	float Speed = Blackboard->GetValueAsFloat(FName("ProjectileSpeed"));
+	//float Damage = Blackboard->GetValueAsFloat(FName("BulletDamage"));
+	//float Speed = Blackboard->GetValueAsFloat(FName("ProjectileSpeed"));
 	bool Piercing = Blackboard->GetValueAsBool(FName("Piercing"));
 
 	SpawnedProjectile->Constructor(Damage, Speed, Piercing, Shooter);

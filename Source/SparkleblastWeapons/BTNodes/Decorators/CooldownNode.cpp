@@ -6,15 +6,16 @@
 
 void UCooldownNode::Reset()
 {
-	TimeStarted = 0.0f;
+	TimeStarted = -INFINITY;
 	Child->Reset();
 }
 
 NodeStatus UCooldownNode::Update()
 {
 	float GameTime = Blackboard->GetValueAsFloat(FName("GameTime"));
-	float ActualDuration = DurationBlackboardKey == "" ?
-		DefaultDuration : Blackboard->GetValueAsFloat(FName(DurationBlackboardKey));
+	float ActualDuration = !CooldownCurve ? DefaultDuration : 
+		1.0f / FMath::Max(CooldownCurve->
+		GetFloatValue(GameTime - Blackboard->GetValueAsFloat(FName("StartTimeTriggerPressed"))), 0.0f);
 
 	if (GameTime - TimeStarted >= ActualDuration)
 	{

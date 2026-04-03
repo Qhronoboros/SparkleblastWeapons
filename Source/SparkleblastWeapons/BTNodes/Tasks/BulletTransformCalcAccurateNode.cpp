@@ -13,10 +13,8 @@ NodeStatus UBulletTransformCalcAccurateNode::Update()
 	FVector HeadDirection = Blackboard->GetValueAsVector(FName("HeadDirection"));
 	FVector MuzzleLocation = Blackboard->GetValueAsVector(FName("MuzzleLocation"));
 
-	float Spread = Blackboard->GetValueAsFloat(FName("BulletSpread"));
-
 	// Degrees to Radian
-	FVector RandomizedDirection = FMath::VRandCone(HeadDirection, PI/180.0f * Spread);
+	FVector RandomizedDirection = FMath::VRandCone(HeadDirection, PI/180.0f * BulletSpread);
 
 	// Default
 	FVector OutDirection;

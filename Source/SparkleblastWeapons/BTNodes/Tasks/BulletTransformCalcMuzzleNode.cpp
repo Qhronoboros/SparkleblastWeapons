@@ -9,12 +9,10 @@ NodeStatus UBulletTransformCalcMuzzleNode::Update()
 	Blackboard->SetValueAsVector(FName("ShootLocation"), 
 		Blackboard->GetValueAsVector("MuzzleLocation"));
 
-	float Spread = Blackboard->GetValueAsFloat(FName("BulletSpread"));
-
 	// Degrees to Radian
 	FVector RandomizedDirection = FMath::VRandCone(
 		Blackboard->GetValueAsVector("MuzzleDirection"),
-		PI / 180.0f * Spread);
+		PI / 180.0f * BulletSpread);
 
 	Blackboard->SetValueAsVector(FName("ShootDirection"), RandomizedDirection);
 

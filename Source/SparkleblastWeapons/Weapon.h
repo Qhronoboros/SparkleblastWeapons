@@ -23,15 +23,18 @@ class SPARKLEBLASTWEAPONS_API IWeapon
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	TSubclassOf<UUserWidget> GetCrosshair();
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void InitializeWeapon(AActor* Shooter, USceneComponent* Head);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void StartAttacking(USceneComponent* OwnerLook, AActor* OwnerShooter);
+	TSubclassOf<UUserWidget> GetCrosshair();
+	virtual TSubclassOf<UUserWidget> GetCrosshair_Implementation() { return NULL; };
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void StartAttacking();
+	virtual void StartAttacking_Implementation() { };
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void StopAttacking();
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void Attack(FTransform OwnerLookTransform);
+	virtual void StopAttacking_Implementation() { };
 };

@@ -17,7 +17,6 @@ NodeStatus UShootHitscanNode::Update()
 
 	float MaxDistance = Blackboard->GetValueAsFloat(FName("MaxShootDistance"));
 
-	float Damage = Blackboard->GetValueAsFloat(FName("BulletDamage"));
 	bool Piercing = Blackboard->GetValueAsBool(FName("Piercing"));
 
 	TArray<FHitResult> HitResults;

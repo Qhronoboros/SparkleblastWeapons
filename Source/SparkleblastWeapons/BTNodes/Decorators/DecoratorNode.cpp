@@ -5,7 +5,15 @@
 void UDecoratorNode::SetupBlackboard(UBlackboardComponent* NewBlackboard)
 {
 	Blackboard = NewBlackboard;
-	Child->SetupBlackboard(NewBlackboard);
+
+    if (Child)
+    {
+        Child->SetupBlackboard(NewBlackboard);
+    }
+    else
+    {
+        UE_LOG(LogTemp, Display, TEXT("Child is NULL in Decorator"));
+    }
 }
 
 void UDecoratorNode::Reset()

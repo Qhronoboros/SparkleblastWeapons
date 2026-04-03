@@ -16,4 +16,8 @@ class SPARKLEBLASTWEAPONS_API UBulletTransformCalcMuzzleNode : public UBaseNode
 
 protected:
 	virtual NodeStatus Update() override;
+
+private:
+	UPROPERTY(EditAnywhere)
+	float BulletSpread;
 };

@@ -18,6 +18,9 @@ protected:
 	virtual NodeStatus Update() override;
 
 	UPROPERTY(EditAnywhere)
+	float Damage;
+
+	UPROPERTY(EditAnywhere)
 	bool ShowDebugLine;
 
 	UPROPERTY(EditAnywhere)

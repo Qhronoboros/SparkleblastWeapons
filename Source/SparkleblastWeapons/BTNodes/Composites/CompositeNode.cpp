@@ -8,7 +8,14 @@ void UCompositeNode::SetupBlackboard(UBlackboardComponent* NewBlackboard)
 
     for (UBaseNode* Child : Children)
     {
-        Child->SetupBlackboard(NewBlackboard);
+        if (Child)
+        {
+            Child->SetupBlackboard(NewBlackboard);
+        }
+        else
+        {
+            UE_LOG(LogTemp, Display, TEXT("Child is NULL in Composite"));
+        }
     }
 }
 

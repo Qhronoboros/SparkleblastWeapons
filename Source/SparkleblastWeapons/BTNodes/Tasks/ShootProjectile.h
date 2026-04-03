@@ -20,5 +20,11 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere)
+	float Damage;
+
+	UPROPERTY(EditAnywhere)
+	float Speed;
+
+	UPROPERTY(EditAnywhere)
 	TSubclassOf<ABaseProjectile> Projectile;
 };
