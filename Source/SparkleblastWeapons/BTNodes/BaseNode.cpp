@@ -8,7 +8,7 @@ void UBaseNode::SetupBlackboard(UBlackboardComponent* NewBlackboard)
 	Blackboard = NewBlackboard;
 }
 
-NodeStatus UBaseNode::Process()
+ENodeStatus UBaseNode::Process()
 {
     if (!WasEntered)
     {
@@ -16,8 +16,8 @@ NodeStatus UBaseNode::Process()
         WasEntered = true;
     }
 
-    NodeStatus result = Update();
-    if (result != NodeStatus::Running)
+    ENodeStatus result = Update();
+    if (result != ENodeStatus::Running)
     {
         OnExit();
         WasEntered = false;

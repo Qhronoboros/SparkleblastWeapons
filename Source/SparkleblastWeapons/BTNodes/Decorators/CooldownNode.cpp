@@ -10,7 +10,7 @@ void UCooldownNode::Reset()
 	Child->Reset();
 }
 
-NodeStatus UCooldownNode::Update()
+ENodeStatus UCooldownNode::Update()
 {
 	float GameTime = Blackboard->GetValueAsFloat(FName("GameTime"));
 	float ActualDuration = !CooldownCurve ? DefaultDuration : 
@@ -23,5 +23,5 @@ NodeStatus UCooldownNode::Update()
 		return Child->Process();
 	}
 	
-	return NodeStatus::Running;
+	return ENodeStatus::Running;
 }

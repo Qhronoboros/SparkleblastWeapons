@@ -3,7 +3,7 @@
 
 #include "PrintNode.h"
 
-NodeStatus UPrintNode::Update()
+ENodeStatus UPrintNode::Update()
 {
 	UE_LOG(LogTemp, Display, TEXT("%s"), *PrintText);
 
@@ -12,5 +12,5 @@ NodeStatus UPrintNode::Update()
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("%s"), *PrintText));
 	}
 
-	return NodeStatus::Success;
+	return ENodeStatus::Success;
 }

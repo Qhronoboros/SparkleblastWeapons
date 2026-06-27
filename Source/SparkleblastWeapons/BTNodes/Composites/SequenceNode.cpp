@@ -3,23 +3,23 @@
 
 #include "SequenceNode.h"
 
-NodeStatus USequenceNode::Update()
+ENodeStatus USequenceNode::Update()
 {
     int childCount = Children.Num();
 
     for (; CurrentChild < childCount; CurrentChild++)
     {
-        NodeStatus result = Children[CurrentChild]->Process();
+        ENodeStatus result = Children[CurrentChild]->Process();
         switch (result)
         {
-        case NodeStatus::Success: continue;
-        case NodeStatus::Failed: return NodeStatus::Failed;
-        case NodeStatus::Running: return NodeStatus::Running;
+        case ENodeStatus::Success: continue;
+        case ENodeStatus::Failed: return ENodeStatus::Failed;
+        case ENodeStatus::Running: return ENodeStatus::Running;
         }
     }
 
     Reset();
-    return NodeStatus::Success;
+    return ENodeStatus::Success;
 }
 
 void USequenceNode::OnEnter()

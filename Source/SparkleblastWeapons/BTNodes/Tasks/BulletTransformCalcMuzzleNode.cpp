@@ -4,17 +4,20 @@
 #include "BulletTransformCalcMuzzleNode.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
-NodeStatus UBulletTransformCalcMuzzleNode::Update()
+// Set ShootLocation and ShootDirection in Blackboard
+// ShootLocation = MuzzleLocation
+// ShootDirection = MuzzleDirection
+ENodeStatus UBulletTransformCalcMuzzleNode::Update()
 {
 	Blackboard->SetValueAsVector(FName("ShootLocation"), 
 		Blackboard->GetValueAsVector("MuzzleLocation"));
 
-	// Degrees to Radian
+	// Apply BulletSpread, also convert Degrees to Radian
 	FVector RandomizedDirection = FMath::VRandCone(
 		Blackboard->GetValueAsVector("MuzzleDirection"),
 		PI / 180.0f * BulletSpread);
 
 	Blackboard->SetValueAsVector(FName("ShootDirection"), RandomizedDirection);
 
-	return NodeStatus::Success;
+	return ENodeStatus::Success;
 }

@@ -19,7 +19,7 @@ public:
 	virtual void Reset() override;
 
 protected:
-	virtual NodeStatus Update() override;
+	virtual ENodeStatus Update() override;
 
 private:
 	// X = seconds, Y = amount of times per second

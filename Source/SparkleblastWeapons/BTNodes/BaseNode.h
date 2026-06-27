@@ -22,16 +22,17 @@ public:
 	virtual void Reset() { };
 
 	UFUNCTION(BlueprintCallable)
-	virtual NodeStatus Process();
+	virtual ENodeStatus Process();
 
 protected:
 	UBlackboardComponent* Blackboard;
 
-	virtual NodeStatus Update() PURE_VIRTUAL(UBaseNode::Update, return NodeStatus::Success;);
+	virtual ENodeStatus Update() PURE_VIRTUAL(UBaseNode::Update, return ENodeStatus::Success;);
 
 	virtual void OnEnter() { };
 	virtual void OnExit() { };
 
 private:
+	UPROPERTY()
 	bool WasEntered = false;
 };

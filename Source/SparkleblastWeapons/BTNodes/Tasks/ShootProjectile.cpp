@@ -5,12 +5,13 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "../../DelegateContainers/DelegateContainerVecVec.h"
 
-NodeStatus UShootProjectile::Update()
+// Spawns a projectile and set member variables of projectile
+ENodeStatus UShootProjectile::Update()
 {
 	if (!Projectile)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("%s: Provided Projectile is null"), *FString(UTF8_TO_TCHAR(__FUNCTION__)));
-		return NodeStatus::Failed;
+		return ENodeStatus::Failed;
 	}
 
 	FActorSpawnParameters spawnParams;
@@ -26,7 +27,7 @@ NodeStatus UShootProjectile::Update()
 
 	if (!Shooter)
 	{
-		return NodeStatus::Failed;
+		return ENodeStatus::Failed;
 	}
 
 	//float Damage = Blackboard->GetValueAsFloat(FName("BulletDamage"));
@@ -42,5 +43,5 @@ NodeStatus UShootProjectile::Update()
 		BulletFired->ExecuteDelegates(StartLocation, Direction);
 	}
 
-	return NodeStatus::Success;
+	return ENodeStatus::Success;
 }

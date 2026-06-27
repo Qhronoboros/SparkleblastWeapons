@@ -18,6 +18,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	// Sets the member variables (in Blueprint)
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void Constructor(float AttackDamage, float Speed, bool Piercing, AActor* Shooter);
 

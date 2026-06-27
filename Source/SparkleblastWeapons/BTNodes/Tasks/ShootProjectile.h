@@ -16,7 +16,7 @@ class SPARKLEBLASTWEAPONS_API UShootProjectile : public UBaseNode
 	GENERATED_BODY()
 
 protected:
-	virtual NodeStatus Update() override;
+	virtual ENodeStatus Update() override;
 
 private:
 	UPROPERTY(EditAnywhere)

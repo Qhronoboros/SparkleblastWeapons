@@ -2,11 +2,11 @@
 
 #pragma once
 
-UENUM()
-enum class ArithmeticOperator : uint8
+UENUM(BlueprintType)
+enum class EArithmeticOperator : uint8
 {
-    Add,
-    Subtract,
-    Multiply,
-    Divide
+    Add UMETA(DisplayName = "Addition"),
+    Subtract UMETA(DisplayName = "Subtraction"),
+    Multiply UMETA(DisplayName = "Multiplication"),
+    Divide UMETA(DisplayName = "Division")
 };

@@ -3,23 +3,23 @@
 
 #include "SelectorNode.h"
 
-NodeStatus USelectorNode::Update()
+ENodeStatus USelectorNode::Update()
 {
     int childCount = Children.Num();
 
     for (; CurrentChild < childCount; CurrentChild++)
     {
-        NodeStatus result = Children[CurrentChild]->Process();
+        ENodeStatus result = Children[CurrentChild]->Process();
         switch (result)
         {
-        case NodeStatus::Success: return NodeStatus::Success;
-        case NodeStatus::Failed: continue;
-        case NodeStatus::Running: return NodeStatus::Running;
+        case ENodeStatus::Success: return ENodeStatus::Success;
+        case ENodeStatus::Failed: continue;
+        case ENodeStatus::Running: return ENodeStatus::Running;
         }
     }
 
     Reset();
-    return NodeStatus::Failed;
+    return ENodeStatus::Failed;
 }
 
 void USelectorNode::OnEnter()

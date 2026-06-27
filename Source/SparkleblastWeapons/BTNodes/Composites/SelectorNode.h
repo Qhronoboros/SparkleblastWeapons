@@ -15,7 +15,7 @@ class SPARKLEBLASTWEAPONS_API USelectorNode : public UCompositeNode
 	GENERATED_BODY()
 
 protected:
-    virtual NodeStatus Update() override;
+    virtual ENodeStatus Update() override;
 
     virtual void OnEnter() override;
     virtual void OnExit() override;

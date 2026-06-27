@@ -20,8 +20,11 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
-	ArithmeticOperator operate;
+	EArithmeticOperator operate;
 
 	UPROPERTY(EditAnywhere)
 	float ChangingValue;
+
+	UPROPERTY(EditAnywhere)
+	int Priority;
 };

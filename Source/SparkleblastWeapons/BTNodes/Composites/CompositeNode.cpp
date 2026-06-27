@@ -28,7 +28,7 @@ void UCompositeNode::Reset()
     }
 }
 
-NodeStatus UCompositeNode::Update()
+ENodeStatus UCompositeNode::Update()
 {
     return Children[CurrentChild]->Process();
 }

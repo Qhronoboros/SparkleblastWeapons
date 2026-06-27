@@ -5,7 +5,10 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
-NodeStatus UBulletTransformCalcAccurateNode::Update()
+// Set ShootLocation and ShootDirection in Blackboard
+// ShootLocation = HeadLocation
+// ShootDirection = a vector from MuzzleLocation to potential target
+ENodeStatus UBulletTransformCalcAccurateNode::Update()
 {
 	UWorld* World = Blackboard->GetValueAsObject(FName("SelfWeapon"))->GetWorld();
 	float MaxDistance = Blackboard->GetValueAsFloat(FName("MaxShootDistance"));
@@ -13,7 +16,7 @@ NodeStatus UBulletTransformCalcAccurateNode::Update()
 	FVector HeadDirection = Blackboard->GetValueAsVector(FName("HeadDirection"));
 	FVector MuzzleLocation = Blackboard->GetValueAsVector(FName("MuzzleLocation"));
 
-	// Degrees to Radian
+	// Apply BulletSpread, also convert Degrees to Radian
 	FVector RandomizedDirection = FMath::VRandCone(HeadDirection, PI/180.0f * BulletSpread);
 
 	// Default
@@ -35,10 +38,9 @@ NodeStatus UBulletTransformCalcAccurateNode::Update()
 	OutDirection.Normalize();
 
 	Blackboard->SetValueAsVector(FName("ShootLocation"), MuzzleLocation);
-
 	Blackboard->SetValueAsVector(FName("ShootDirection"), OutDirection);
 
-	return NodeStatus::Success;
+	return ENodeStatus::Success;
 }
 
 bool UBulletTransformCalcAccurateNode::GetLineTraceHit(UWorld* World, FVector Location, FVector Direction, float MaxDistance, FHitResult& Hit)

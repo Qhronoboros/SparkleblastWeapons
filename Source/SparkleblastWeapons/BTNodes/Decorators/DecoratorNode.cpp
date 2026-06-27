@@ -21,7 +21,7 @@ void UDecoratorNode::Reset()
 	Child->Reset();
 }
 
-NodeStatus UDecoratorNode::Update()
+ENodeStatus UDecoratorNode::Update()
 {
 	return Child->Process();
 }

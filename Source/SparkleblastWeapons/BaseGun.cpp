@@ -84,7 +84,7 @@ void ABaseGun::TraverseNodeTree(UBaseNode* NodeTree)
 		Blackboard->SetValueAsVector(FName("HeadDirection"), Head->GetForwardVector());
 	}
 
-	if (NodeTree->Process() == NodeStatus::Success)
+	if (NodeTree->Process() == ENodeStatus::Success)
 	{
 		OnGunFired.Broadcast(
 			Blackboard->GetValueAsVector(FName("ShootLocation")),

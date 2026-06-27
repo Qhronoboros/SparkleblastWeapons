@@ -8,9 +8,9 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-NodeStatus UShootHitscanNode::Update()
+// Trace a ray and deal damage to targets hit by ray
+ENodeStatus UShootHitscanNode::Update()
 {
-	// Multi Line Trace Hitscan
 	UWorld* World = Blackboard->GetValueAsObject(FName("SelfWeapon"))->GetWorld();
 	FVector StartLocation = Blackboard->GetValueAsVector(FName("ShootLocation"));
 	FVector Direction = Blackboard->GetValueAsVector(FName("ShootDirection"));
@@ -28,8 +28,14 @@ NodeStatus UShootHitscanNode::Update()
 		HitResults,
 		Piercing);
 
-	// Loop through results
+	// Callback
+	UDelegateContainerVecVec* BulletFired = Cast<UDelegateContainerVecVec>(Blackboard->GetValueAsObject(FName("OnBulletFired")));
+	if (BulletFired)
+	{
+		BulletFired->ExecuteDelegates(StartLocation, Direction);
+	}
 
+	// Loop through results
 	FVector LatestImpactPoint = StartLocation + Direction * MaxDistance;
 	for (FHitResult Hit : HitResults)
 	{
@@ -48,13 +54,7 @@ NodeStatus UShootHitscanNode::Update()
 			HealthComponent->DealDamage(actor, Damage);
 		}
 
-		// Callbacks
-		UDelegateContainerVecVec* BulletFired = Cast<UDelegateContainerVecVec>(Blackboard->GetValueAsObject(FName("OnBulletFired")));
-		if (BulletFired)
-		{
-			BulletFired->ExecuteDelegates(StartLocation, Direction);
-		}
-
+		// Callback
 		UDelegateContainerActorVec* BulletHit = Cast<UDelegateContainerActorVec>(Blackboard->GetValueAsObject(FName("OnBulletHit")));
 		if (BulletHit)
 		{
@@ -72,13 +72,14 @@ NodeStatus UShootHitscanNode::Update()
 			}
 		}
 	}
-	// End of loop, If Show Debug Line, Draw Debug Line
+
+	// If Show Debug Line, Draw Debug Line
 	if (ShowDebugLine)
 	{
 		DrawDebugLine(World, StartLocation, LatestImpactPoint, FColor::Blue, false, DebugLineDuration);
 	}
 
-	return NodeStatus::Success;
+	return ENodeStatus::Success;
 }
 
 bool UShootHitscanNode::LineTraceHitscan(

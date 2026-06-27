@@ -19,5 +19,5 @@ protected:
 	UPROPERTY(EditAnywhere, Instanced)
 	UBaseNode* Child;
 
-	virtual NodeStatus Update() override;
+	virtual ENodeStatus Update() override;
 };

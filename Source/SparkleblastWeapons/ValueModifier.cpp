@@ -8,16 +8,16 @@ float UValueModifier::Modify(float Value)
 	// Maybe make this a strategy pattern with DataAsset
 	switch (operate)
 	{
-	case ArithmeticOperator::Add:
+	case EArithmeticOperator::Add:
 		return Value + ChangingValue;
 		break;
-	case ArithmeticOperator::Subtract:
+	case EArithmeticOperator::Subtract:
 		return Value - ChangingValue;
 		break;
-	case ArithmeticOperator::Multiply:
+	case EArithmeticOperator::Multiply:
 		return Value * ChangingValue;
 		break;
-	case ArithmeticOperator::Divide:
+	case EArithmeticOperator::Divide:
 		return Value / ChangingValue;
 		break;
 	default:

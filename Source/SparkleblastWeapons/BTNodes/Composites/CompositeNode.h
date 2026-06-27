@@ -11,7 +11,7 @@ class SPARKLEBLASTWEAPONS_API UCompositeNode : public UBaseNode
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	virtual void SetupBlackboard(UBlackboardComponent* NewBlackboard) override;
 
     virtual void Reset() override;
@@ -23,5 +23,5 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	int CurrentChild = 0;
 
-	virtual NodeStatus Update() override;
+	virtual ENodeStatus Update() override;
 };

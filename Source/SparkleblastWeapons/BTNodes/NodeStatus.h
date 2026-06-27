@@ -2,10 +2,10 @@
 
 #pragma once
 
-UENUM()
-enum class NodeStatus : uint8
+UENUM(BlueprintType)
+enum class ENodeStatus : uint8
 {
-    Success,
-    Failed,
-    Running
+    Success UMETA(DisplayName = "Node Succeeded"),
+    Failed UMETA(DisplayName = "Node Failed"),
+    Running UMETA(DisplayName = "Node still Running")
 };

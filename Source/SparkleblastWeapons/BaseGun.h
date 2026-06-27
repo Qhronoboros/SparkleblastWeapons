@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "BTNodes/BaseNode.h"
 #include "Weapon.h"
+#include "Upgrade.h"
 #include "FMODEvent.h"
 #include "DelegateContainers/DelegateContainerNone.h"
 #include "DelegateContainers/DelegateContainerVecVec.h"
@@ -77,6 +78,12 @@ protected:
 	UPROPERTY(Category = "Gun Properties", BlueprintReadOnly, EditAnywhere)
 	TSubclassOf<UCameraShakeBase> CameraShake;
 
+	UPROPERTY()
+	bool IsBlackboardSet = false;
+	
+	UPROPERTY()
+	bool TriggerHeld = false;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
@@ -87,11 +94,10 @@ protected:
 		AActor* Shooter,
 		USceneComponent* Head);
 
-	bool IsBlackboardSet = false;
-	bool TriggerHeld = false;
-
 private:
+	UPROPERTY()
 	float TimeStarted = 0.0f;
 
+	UFUNCTION()
 	void TraverseNodeTree(UBaseNode* NodeTree);
 };

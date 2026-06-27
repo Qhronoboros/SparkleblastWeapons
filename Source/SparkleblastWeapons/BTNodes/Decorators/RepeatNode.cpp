@@ -4,7 +4,7 @@
 #include "RepeatNode.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
-NodeStatus URepeatNode::Update()
+ENodeStatus URepeatNode::Update()
 {
 	//int ActualRepeat = RepeatBlackboardKey == "" ?
 	//	DefaultRepeat : Blackboard->GetValueAsInt(FName(RepeatBlackboardKey));
@@ -13,8 +13,8 @@ NodeStatus URepeatNode::Update()
 
 	for (int i = 0; i < ActualRepeat; i++)
 	{
-		if (Child->Process() != NodeStatus::Success) break;
+		if (Child->Process() != ENodeStatus::Success) break;
 	}
 
-	return NodeStatus::Success;
+	return ENodeStatus::Success;
 }

@@ -15,7 +15,7 @@ class SPARKLEBLASTWEAPONS_API UShootHitscanNode : public UBaseNode
 	GENERATED_BODY()
 
 protected:
-	virtual NodeStatus Update() override;
+	virtual ENodeStatus Update() override;
 
 	UPROPERTY(EditAnywhere)
 	float Damage;
@@ -29,6 +29,7 @@ protected:
 	UPROPERTY(EditAnywhere)
 	bool PrintHitscan;
 
+	UFUNCTION()
 	bool LineTraceHitscan(
 		const UWorld* World,
 		const FVector StartLocation,
