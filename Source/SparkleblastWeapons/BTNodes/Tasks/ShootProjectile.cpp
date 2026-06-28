@@ -41,7 +41,6 @@ ENodeStatus UShootProjectile::Update()
 	{
 		ActualDamage = DamageMod->ApplyMod(ActualDamage);
 	}
-	ActualDamage = FMath::Max(ActualDamage, 0.0f);
 
 	// Modify Speed
 	float ActualSpeed = Speed;
@@ -52,7 +51,9 @@ ENodeStatus UShootProjectile::Update()
 	}
 	ActualSpeed = FMath::Max(ActualSpeed, MinimumSpeed);
 
-	SpawnedProjectile->Constructor(ActualDamage, ActualSpeed, Piercing, Shooter);
+	UE_LOG(LogTemp, Warning, TEXT("Damage: %f"), ActualDamage);
+
+	SpawnedProjectile->Execute_Constructor(SpawnedProjectile, ActualDamage, ActualSpeed, Piercing, Shooter);
 
 	// Callback
 	UDelegateContainerVecVec* BulletFired = Cast<UDelegateContainerVecVec>(Blackboard->GetValueAsObject(FName("OnBulletFired")));
