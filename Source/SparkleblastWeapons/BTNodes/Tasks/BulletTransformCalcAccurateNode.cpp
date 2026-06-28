@@ -16,8 +16,17 @@ ENodeStatus UBulletTransformCalcAccurateNode::Update()
 	FVector HeadDirection = Blackboard->GetValueAsVector(FName("HeadDirection"));
 	FVector MuzzleLocation = Blackboard->GetValueAsVector(FName("MuzzleLocation"));
 
+	// Modify Spread
+	float ActualBulletSpread = BulletSpread;
+	UModificationApplier* BulletSpreadMod = Cast<UModificationApplier>(Blackboard->GetValueAsObject(BulletSpreadBlackboardKey));
+	if (BulletSpreadMod)
+	{
+		ActualBulletSpread = BulletSpreadMod->ApplyMod(ActualBulletSpread);
+	}
+	ActualBulletSpread = FMath::Max(ActualBulletSpread, 0.0f);
+
 	// Apply BulletSpread, also convert Degrees to Radian
-	FVector RandomizedDirection = FMath::VRandCone(HeadDirection, PI/180.0f * BulletSpread);
+	FVector RandomizedDirection = FMath::VRandCone(HeadDirection, PI/180.0f * ActualBulletSpread);
 
 	// Default
 	FVector OutDirection;

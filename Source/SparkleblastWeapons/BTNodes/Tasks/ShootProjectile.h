@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "../BaseNode.h"
 #include "../../BaseProjectile.h"
+#include "../../ModificationApplier.h"
 #include "ShootProjectile.generated.h"
 
 /**
@@ -20,10 +21,19 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere)
-	float Damage;
+	FName DamageBlackboardKey = FName("BulletDamage");
 
 	UPROPERTY(EditAnywhere)
-	float Speed;
+	FName SpeedBlackboardKey = FName("ProjectileSpeed");
+
+	UPROPERTY(EditAnywhere)
+	float Damage = 0.0f;
+
+	UPROPERTY(EditAnywhere)
+	float Speed = 3000.0f;
+
+	UPROPERTY(EditAnywhere)
+	float MinimumSpeed = 100.0f;
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ABaseProjectile> Projectile;

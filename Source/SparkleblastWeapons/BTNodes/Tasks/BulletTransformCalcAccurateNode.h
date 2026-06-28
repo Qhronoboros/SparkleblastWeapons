@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "../BaseNode.h"
+#include "../../ModificationApplier.h"
 #include "BulletTransformCalcAccurateNode.generated.h"
 
 /**
@@ -21,5 +22,8 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere)
-	float BulletSpread;
+	FName BulletSpreadBlackboardKey = FName("BulletSpread");
+
+	UPROPERTY(EditAnywhere)
+	float BulletSpread = 0.0f;
 };

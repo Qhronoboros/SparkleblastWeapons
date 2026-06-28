@@ -10,6 +10,7 @@
 #include "DelegateContainers/DelegateContainerNone.h"
 #include "DelegateContainers/DelegateContainerVecVec.h"
 #include "DelegateContainers/DelegateContainerActorVec.h"
+#include "ModificationApplier.h"
 #include "GameFramework/Actor.h"
 #include "BaseGun.generated.h"
 
@@ -48,6 +49,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
+	virtual void ApplyUpgrade_Implementation(UUpgrade* Upgrade) override;
+
+	UFUNCTION(BlueprintCallable)
 	virtual TSubclassOf<UUserWidget> GetCrosshair_Implementation() override;
 
 	UFUNCTION(BlueprintCallable)
@@ -77,6 +81,26 @@ protected:
 
 	UPROPERTY(Category = "Gun Properties", BlueprintReadOnly, EditAnywhere)
 	TSubclassOf<UCameraShakeBase> CameraShake;
+	
+	// Upgrades
+	UPROPERTY()
+	TArray<UUpgrade*> Upgrades;
+
+	// Stat Modifications
+	UPROPERTY()
+	UModificationApplier* BulletSpreadMod;
+
+	UPROPERTY()
+	UModificationApplier* BulletDamageMod;
+
+	UPROPERTY()
+	UModificationApplier* ProjectileSpeedMod;
+
+	UPROPERTY()
+	UModificationApplier* BulletsPerShotMod;
+
+	UPROPERTY()
+	UModificationApplier* FireRateMod;
 
 	UPROPERTY()
 	bool IsBlackboardSet = false;
@@ -93,6 +117,9 @@ protected:
 		USceneComponent* Muzzle,
 		AActor* Shooter,
 		USceneComponent* Head);
+
+	// Not UFUNCTION, because double pointer would not be possible
+	void InstantiateModificationApplier(const FName& KeyName, UModificationApplier** ModificationApplier);
 
 private:
 	UPROPERTY()

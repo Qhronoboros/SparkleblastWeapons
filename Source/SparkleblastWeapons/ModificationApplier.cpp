@@ -3,22 +3,22 @@
 
 #include "ModificationApplier.h"
 
-float AModificationApplier::Modify(float Value)
+float UModificationApplier::ApplyMod(float Value)
 {
 	for (UValueModifier* Modifier : Modifiers)
 	{
-		Value = Modifier->Modify(Value);
+		Value = Modifier->ApplyMod(Value);
 	}
 
 	return Value;
 }
 
-void AModificationApplier::AddModifier(UValueModifier* Modifier)
+void UModificationApplier::AddModifier(UValueModifier* Modifier)
 {
 	Modifiers.Add(Modifier);
 }
 
-void AModificationApplier::RemoveModifier(UValueModifier* Modifier)
+void UModificationApplier::RemoveModifier(UValueModifier* Modifier)
 {
 	Modifiers.Remove(Modifier);
 }

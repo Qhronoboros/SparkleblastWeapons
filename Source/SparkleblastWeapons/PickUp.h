@@ -13,7 +13,7 @@ class SPARKLEBLASTWEAPONS_API APickUp : public AActor
 	GENERATED_BODY()
 	
 public:	
-	UPROPERTY(EditAnywhere, Instanced)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Instanced)
 	UUpgrade* Upgrade;
 
 	// Sets default values for this actor's properties

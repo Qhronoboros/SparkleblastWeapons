@@ -10,13 +10,19 @@
 class UBlackboardComponent;
 class UBlackboardData;
 
-UCLASS( BlueprintType, EditInlineNew )
+UCLASS(BlueprintType, EditInlineNew)
 class SPARKLEBLASTWEAPONS_API UUpgrade : public UDataAsset
 {
 	GENERATED_BODY()
 
 public:
+	UFUNCTION(BlueprintPure)
+	FString GetUpgradeDescription();
+
+	UFUNCTION()
 	void TransferModifiers(UBlackboardComponent* Blackboard);
+
+	UFUNCTION()
 	void RemoveModifiers(UBlackboardComponent* Blackboard);
 
 private:

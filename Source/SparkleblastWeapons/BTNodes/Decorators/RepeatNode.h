@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "DecoratorNode.h"
+#include "../../ModificationApplier.h"
 #include "RepeatNode.generated.h"
 
 /**
@@ -18,9 +19,9 @@ protected:
 	virtual ENodeStatus Update() override;
 
 private:
-	//UPROPERTY(EditAnywhere)
-	//FString RepeatBlackboardKey;
+	UPROPERTY(EditAnywhere)
+	FName RepeatBlackboardKey = FName("BulletsPerShot");
 
 	UPROPERTY(EditAnywhere)
-	int RepeatAmount;
+	int RepeatAmount = 1;
 };

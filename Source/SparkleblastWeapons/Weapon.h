@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Upgrade.h"
 #include "UObject/Interface.h"
 #include "Blueprint/UserWidget.h"
 #include "Weapon.generated.h"
@@ -25,6 +26,10 @@ class SPARKLEBLASTWEAPONS_API IWeapon
 public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void InitializeWeapon(AActor* Shooter, USceneComponent* Head);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ApplyUpgrade(UUpgrade* Upgrade);
+	virtual void ApplyUpgrade_Implementation(UUpgrade* Upgrade) { };
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	TSubclassOf<UUserWidget> GetCrosshair();

@@ -11,6 +11,14 @@ ENodeStatus URepeatNode::Update()
 
 	int ActualRepeat = RepeatAmount;
 
+	// Modify Repeat
+	UModificationApplier* RepeatMod = Cast<UModificationApplier>(Blackboard->GetValueAsObject(RepeatBlackboardKey));
+	if (RepeatMod)
+	{
+		ActualRepeat = RepeatMod->ApplyMod(ActualRepeat);
+	}
+	ActualRepeat = FMath::Max(ActualRepeat, 0);
+
 	for (int i = 0; i < ActualRepeat; i++)
 	{
 		if (Child->Process() != ENodeStatus::Success) break;

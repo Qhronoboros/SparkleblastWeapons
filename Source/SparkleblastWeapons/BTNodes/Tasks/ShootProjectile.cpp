@@ -34,7 +34,25 @@ ENodeStatus UShootProjectile::Update()
 	//float Speed = Blackboard->GetValueAsFloat(FName("ProjectileSpeed"));
 	bool Piercing = Blackboard->GetValueAsBool(FName("Piercing"));
 
-	SpawnedProjectile->Constructor(Damage, Speed, Piercing, Shooter);
+	// Modify Damage
+	float ActualDamage = Damage;
+	UModificationApplier* DamageMod = Cast<UModificationApplier>(Blackboard->GetValueAsObject(DamageBlackboardKey));
+	if (DamageMod)
+	{
+		ActualDamage = DamageMod->ApplyMod(ActualDamage);
+	}
+	ActualDamage = FMath::Max(ActualDamage, 0.0f);
+
+	// Modify Speed
+	float ActualSpeed = Speed;
+	UModificationApplier* SpeedMod = Cast<UModificationApplier>(Blackboard->GetValueAsObject(SpeedBlackboardKey));
+	if (SpeedMod)
+	{
+		ActualSpeed = SpeedMod->ApplyMod(ActualSpeed);
+	}
+	ActualSpeed = FMath::Max(ActualSpeed, MinimumSpeed);
+
+	SpawnedProjectile->Constructor(ActualDamage, ActualSpeed, Piercing, Shooter);
 
 	// Callback
 	UDelegateContainerVecVec* BulletFired = Cast<UDelegateContainerVecVec>(Blackboard->GetValueAsObject(FName("OnBulletFired")));

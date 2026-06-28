@@ -1,12 +1,38 @@
+#include "ValueModifier.h"
 // Fill out your copyright notice in the Description page of Project Settings.
 
+FString UValueModifier::GetModifyDescription()
+{
+	FString OperatorString = "";
+	// Maybe make this a strategy pattern with DataAsset
+	switch (Operator)
+	{
+	case EArithmeticOperator::Add:
+		OperatorString = "+";
+		break;
+	case EArithmeticOperator::Subtract:
+		OperatorString = "-";
+		break;
+	case EArithmeticOperator::Multiply:
+		OperatorString = "x";
+		break;
+	case EArithmeticOperator::Divide:
+		OperatorString = "/";
+		break;
+	default:
+		OperatorString = "?";
+		break;
+	}
 
-#include "ValueModifier.h"
+	FString Output = BlackboardKey + " " + OperatorString + FString::SanitizeFloat(ChangingValue);
 
-float UValueModifier::Modify(float Value)
+	return Output;
+}
+
+float UValueModifier::ApplyMod(float Value)
 {
 	// Maybe make this a strategy pattern with DataAsset
-	switch (operate)
+	switch (Operator)
 	{
 	case EArithmeticOperator::Add:
 		return Value + ChangingValue;

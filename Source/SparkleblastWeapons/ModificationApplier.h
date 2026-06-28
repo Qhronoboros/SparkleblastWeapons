@@ -4,20 +4,25 @@
 
 #include "CoreMinimal.h"
 #include "ValueModifier.h"
-#include "GameFramework/Actor.h"
+#include "Engine/DataAsset.h"
 #include "ModificationApplier.generated.h"
 
-UCLASS()
-class SPARKLEBLASTWEAPONS_API AModificationApplier : public AActor
+UCLASS(BlueprintType)
+class SPARKLEBLASTWEAPONS_API UModificationApplier : public UDataAsset
 {
 	GENERATED_BODY()
 
 public:
-	float Modify(float Value);
+	UFUNCTION()
+	float ApplyMod(float Value);
 
+	UFUNCTION()
 	void AddModifier(UValueModifier* Modifier);
+
+	UFUNCTION()
 	void RemoveModifier(UValueModifier* Modifier);
 
 private:
+	UPROPERTY()
 	TArray<UValueModifier*> Modifiers;
 };

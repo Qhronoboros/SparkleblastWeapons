@@ -46,12 +46,27 @@ ENodeStatus UShootHitscanNode::Update()
 		// Set Latest Impact Point
 		LatestImpactPoint = Hit.ImpactPoint;
 
+		// Modify Damage
+		float ActualDamage = Damage;
+		UModificationApplier* DamageMod = Cast<UModificationApplier>(Blackboard->GetValueAsObject(DamageBlackboardKey));
+		if (DamageMod)
+		{
+			ActualDamage = DamageMod->ApplyMod(ActualDamage);
+		}
+		ActualDamage = FMath::Max(ActualDamage, 0.0f);
+
 		// Deal Damage
 		AActor* actor = Cast<AActor>(Blackboard->GetValueAsObject(FName("Shooter")));
 		UHealth* HealthComponent = HitActor->GetComponentByClass<UHealth>();
 		if (HealthComponent)
 		{
-			HealthComponent->DealDamage(actor, Damage);
+			// Debug Damage Onscreen Logging
+			if (GEngine)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("Hitscan Damage: %f"), ActualDamage));
+			}
+
+			HealthComponent->DealDamage(actor, ActualDamage);
 		}
 
 		// Callback

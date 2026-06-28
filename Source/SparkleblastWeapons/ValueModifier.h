@@ -16,15 +16,19 @@ public:
 	UPROPERTY(EditAnywhere)
 	FString BlackboardKey;
 
-	float Modify(float Value);
+	UPROPERTY(EditAnywhere)
+	int Priority;
+
+	UFUNCTION()
+	FString GetModifyDescription();
+
+	UFUNCTION()
+	float ApplyMod(float Value);
 
 private:
 	UPROPERTY(EditAnywhere)
-	EArithmeticOperator operate;
+	EArithmeticOperator Operator;
 
 	UPROPERTY(EditAnywhere)
 	float ChangingValue;
-
-	UPROPERTY(EditAnywhere)
-	int Priority;
 };

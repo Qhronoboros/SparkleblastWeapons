@@ -34,12 +34,21 @@ bool ABaseGun::SetupBlackboard(
 		Blackboard->SetValueAsObject(FName("Shooter"), Shooter);
 		Blackboard->SetValueAsObject(FName("Head"), Head);
 
+		// Setting ModificationAppliers for Stat Upgrades
+		InstantiateModificationApplier(FName("BulletSpread"), &BulletSpreadMod);
+		InstantiateModificationApplier(FName("BulletDamage"), &BulletDamageMod);
+		InstantiateModificationApplier(FName("ProjectileSpeed"), &ProjectileSpeedMod);
+		InstantiateModificationApplier(FName("BulletsPerShot"), &BulletsPerShotMod);
+		InstantiateModificationApplier(FName("FireRate"), &FireRateMod);
+
+		// Setting Delegates for Blackboard Callbacks
 		OnBulletFired = NewObject<UDelegateContainerVecVec>();
 		Blackboard->SetValueAsObject(FName("OnBulletFired"), OnBulletFired);
 
 		OnBulletHit = NewObject<UDelegateContainerActorVec>();
 		Blackboard->SetValueAsObject(FName("OnBulletHit"), OnBulletHit);
 
+		// Setup the Blackboard for the nodes in the corresponding trees
 		if (NodeTreeOnPressed != nullptr)
 		{
 			NodeTreeOnPressed->SetupBlackboard(BlackboardComponent);
@@ -60,6 +69,16 @@ bool ABaseGun::SetupBlackboard(
 	}
 
 	return false;
+}
+
+void ABaseGun::InstantiateModificationApplier(const FName& KeyName, UModificationApplier** ModificationApplier)
+{
+	// Checking if key exists in Blackboard
+	if ((uint16)Blackboard->GetKeyID(KeyName) != MAX_uint16)
+	{
+		*ModificationApplier = NewObject<UModificationApplier>();
+		Blackboard->SetValueAsObject(KeyName, *ModificationApplier);
+	}
 }
 
 void ABaseGun::TraverseNodeTree(UBaseNode* NodeTree)
@@ -100,6 +119,12 @@ void ABaseGun::Tick(float DeltaTime)
 	if (!TriggerHeld || !IsBlackboardSet) return;
 
 	TraverseNodeTree(NodeTreeOnHeld);
+}
+
+void ABaseGun::ApplyUpgrade_Implementation(UUpgrade* Upgrade)
+{
+	Upgrade->TransferModifiers(Blackboard);
+	Upgrades.Add(Upgrade);
 }
 
 TSubclassOf<UUserWidget> ABaseGun::GetCrosshair_Implementation()

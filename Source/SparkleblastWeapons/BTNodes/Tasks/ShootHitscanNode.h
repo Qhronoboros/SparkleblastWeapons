@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "../BaseNode.h"
+#include "../../ModificationApplier.h"
 #include "ShootHitscanNode.generated.h"
 
 /**
@@ -17,17 +18,21 @@ class SPARKLEBLASTWEAPONS_API UShootHitscanNode : public UBaseNode
 protected:
 	virtual ENodeStatus Update() override;
 
+private:
 	UPROPERTY(EditAnywhere)
-	float Damage;
+	FName DamageBlackboardKey = FName("BulletDamage");
 
 	UPROPERTY(EditAnywhere)
-	bool ShowDebugLine;
+	float Damage = 0.0f;
 
 	UPROPERTY(EditAnywhere)
-	float DebugLineDuration;
+	bool ShowDebugLine = true;
 
 	UPROPERTY(EditAnywhere)
-	bool PrintHitscan;
+	float DebugLineDuration = 0.25f;
+
+	UPROPERTY(EditAnywhere)
+	bool PrintHitscan = false;
 
 	UFUNCTION()
 	bool LineTraceHitscan(

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "DecoratorNode.h"
+#include "../../ModificationApplier.h"
 #include "CooldownNode.generated.h"
 
 //class FBlackboardKeySelector;
@@ -27,10 +28,10 @@ private:
 	UCurveFloat* CooldownCurve;
 
 	UPROPERTY(EditAnywhere)
-	FString DurationBlackboardKey;
+	FName FrequencyBlackboardKey = FName("FireRate");
 
 	UPROPERTY(EditAnywhere)
-	float DefaultDuration;
+	float DefaultDuration = 1.0f;
 
 	UPROPERTY(VisibleAnywhere)
 	float TimeStarted = -INFINITY;
