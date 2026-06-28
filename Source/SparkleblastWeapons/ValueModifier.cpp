@@ -24,7 +24,8 @@ FString UValueModifier::GetModifyDescription()
 		break;
 	}
 
-	FString Output = BlackboardKey + " " + OperatorString + FString::SanitizeFloat(ChangingValue);
+	FString Output = "Priority " + FString::Printf(TEXT("%d"), Priority) + " - " + BlackboardKey +
+			" " + OperatorString + FString::SanitizeFloat(ChangingValue);
 
 	return Output;
 }

@@ -16,6 +16,10 @@ float UModificationApplier::ApplyMod(float Value)
 void UModificationApplier::AddModifier(UValueModifier* Modifier)
 {
 	Modifiers.Add(Modifier);
+	
+	Modifiers.Sort([](const UValueModifier& a, const UValueModifier& b) {
+			return a.Priority < b.Priority;
+	});
 }
 
 void UModificationApplier::RemoveModifier(UValueModifier* Modifier)
