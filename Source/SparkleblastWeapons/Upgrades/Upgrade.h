@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "ValueModifier.h"
+#include "ValueModifiers/ValueModifier.h"
 #include "Engine/DataAsset.h"
 #include "Upgrade.generated.h"
 

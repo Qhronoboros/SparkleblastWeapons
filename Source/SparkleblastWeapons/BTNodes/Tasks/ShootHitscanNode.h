@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "../BaseNode.h"
-#include "../../ModificationApplier.h"
+#include "../../Upgrades/ModificationApplier.h"
 #include "ShootHitscanNode.generated.h"
 
 /**

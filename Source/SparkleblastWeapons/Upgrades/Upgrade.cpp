@@ -24,10 +24,10 @@ void UUpgrade::TransferModifiers(UBlackboardComponent* Blackboard)
 	for (UValueModifier* Modifier : Modifiers)
 	{
 		// Check if Blackboard contains the key of the Modifier
-		UModificationApplier* ModificationApplier = Cast<UModificationApplier>(Blackboard->GetValueAsObject(FName(Modifier->BlackboardKey)));
+		UModificationApplier* ModificationApplier = Cast<UModificationApplier>(Blackboard->GetValueAsObject(FName(Modifier->GetBlackboardKey())));
 		if (!ModificationApplier)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("%s: Blackboard does not have key: %s"), *FString(UTF8_TO_TCHAR(__FUNCTION__)), *Modifier->BlackboardKey);
+			UE_LOG(LogTemp, Warning, TEXT("%s: Blackboard does not have key: %s"), *FString(UTF8_TO_TCHAR(__FUNCTION__)), *Modifier->GetBlackboardKey());
 			continue;
 		}
 
@@ -42,10 +42,10 @@ void UUpgrade::RemoveModifiers(UBlackboardComponent* Blackboard)
 	{
 		//Blackboard->IsValidKey(FName(Modifier->BlackboardKey));
 		// Check if Blackboard contains the key of the Modifier
-		UModificationApplier* ModificationApplier = Cast<UModificationApplier>(Blackboard->GetValueAsObject(FName(Modifier->BlackboardKey)));
+		UModificationApplier* ModificationApplier = Cast<UModificationApplier>(Blackboard->GetValueAsObject(FName(Modifier->GetBlackboardKey())));
 		if (!ModificationApplier)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("%s: Blackboard does not have key: %s"), *FString(UTF8_TO_TCHAR(__FUNCTION__)), *Modifier->BlackboardKey);
+			UE_LOG(LogTemp, Warning, TEXT("%s: Blackboard does not have key: %s"), *FString(UTF8_TO_TCHAR(__FUNCTION__)), *Modifier->GetBlackboardKey());
 			continue;
 		}
 

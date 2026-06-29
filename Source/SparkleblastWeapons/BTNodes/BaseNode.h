@@ -10,7 +10,7 @@
 class UBlackboardComponent;
 class UBlackboardData;
 
-UCLASS( EditInlineNew, BlueprintType, abstract )
+UCLASS(EditInlineNew, BlueprintType, abstract)
 class SPARKLEBLASTWEAPONS_API UBaseNode : public UDataAsset
 {
 	GENERATED_BODY()

@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "../BaseNode.h"
-#include "../../BaseProjectile.h"
-#include "../../ModificationApplier.h"
+#include "../../Weapons/BaseProjectile.h"
+#include "../../Upgrades/ModificationApplier.h"
 #include "ShootProjectile.generated.h"
 
 /**

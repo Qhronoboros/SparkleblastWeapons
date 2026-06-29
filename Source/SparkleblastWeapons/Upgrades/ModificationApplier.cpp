@@ -18,7 +18,7 @@ void UModificationApplier::AddModifier(UValueModifier* Modifier)
 	Modifiers.Add(Modifier);
 	
 	Modifiers.Sort([](const UValueModifier& a, const UValueModifier& b) {
-			return a.Priority < b.Priority;
+			return a.GetPriority() < b.GetPriority();
 	});
 }
 

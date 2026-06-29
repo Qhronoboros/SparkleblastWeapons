@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BTNodes/BaseNode.h"
 #include "Weapon.h"
-#include "Upgrade.h"
+#include "../BTNodes/BaseNode.h"
+#include "../Upgrades/Upgrade.h"
+#include "../Upgrades/ModificationApplier.h"
+#include "../DelegateContainers/DelegateContainerNone.h"
+#include "../DelegateContainers/DelegateContainerVecVec.h"
+#include "../DelegateContainers/DelegateContainerActorVec.h"
 #include "FMODEvent.h"
-#include "DelegateContainers/DelegateContainerNone.h"
-#include "DelegateContainers/DelegateContainerVecVec.h"
-#include "DelegateContainers/DelegateContainerActorVec.h"
-#include "ModificationApplier.h"
 #include "GameFramework/Actor.h"
 #include "BaseGun.generated.h"
 

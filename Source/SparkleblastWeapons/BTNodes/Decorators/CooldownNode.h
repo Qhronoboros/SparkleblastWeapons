@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "DecoratorNode.h"
-#include "../../ModificationApplier.h"
+#include "../../Upgrades/ModificationApplier.h"
 #include "CooldownNode.generated.h"
 
 //class FBlackboardKeySelector;
