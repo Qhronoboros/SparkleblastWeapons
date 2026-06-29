@@ -18,7 +18,7 @@ class SPARKLEBLASTWEAPONS_API UBulletTransformCalcAccurateNode : public UBaseNod
 protected:
 	virtual ENodeStatus Update() override;
 
-	bool GetLineTraceHit(UWorld* World, FVector location, FVector direction, float MaxDistance, FHitResult& hit);
+	bool GetLineTraceHit(UWorld* World, FVector location, FVector direction, float MaxDistance, FHitResult& hit) const;
 
 private:
 	UPROPERTY(EditAnywhere)

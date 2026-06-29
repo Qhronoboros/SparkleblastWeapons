@@ -33,13 +33,12 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	TSubclassOf<UUserWidget> GetCrosshair();
-	virtual TSubclassOf<UUserWidget> GetCrosshair_Implementation() { return NULL; };
+	virtual TSubclassOf<UUserWidget> GetCrosshair_Implementation() const { return NULL; };
 
 	// When Attack button held
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void StartAttacking();
 	virtual void StartAttacking_Implementation() { };
-
 	// When Attack button released
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void StopAttacking();

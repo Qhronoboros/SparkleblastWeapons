@@ -17,13 +17,13 @@ class SPARKLEBLASTWEAPONS_API UUpgrade : public UDataAsset
 
 public:
 	UFUNCTION(BlueprintPure)
-	FString GetUpgradeDescription();
+	FString GetUpgradeDescription() const;
 
 	UFUNCTION()
-	void TransferModifiers(UBlackboardComponent* Blackboard);
+	void TransferModifiers(UBlackboardComponent* Blackboard) const;
 
 	UFUNCTION()
-	void RemoveModifiers(UBlackboardComponent* Blackboard);
+	void RemoveModifiers(UBlackboardComponent* Blackboard) const;
 
 private:
 	UPROPERTY(EditAnywhere, Instanced)

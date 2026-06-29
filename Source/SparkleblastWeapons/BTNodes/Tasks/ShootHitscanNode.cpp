@@ -32,7 +32,7 @@ ENodeStatus UShootHitscanNode::Update()
 	UDelegateContainerVecVec* BulletFired = Cast<UDelegateContainerVecVec>(Blackboard->GetValueAsObject(FName("OnBulletFired")));
 	if (BulletFired)
 	{
-		BulletFired->ExecuteDelegates(StartLocation, Direction);
+		BulletFired->InvokeFunctors(StartLocation, Direction);
 	}
 
 	// Loop through results
@@ -73,7 +73,7 @@ ENodeStatus UShootHitscanNode::Update()
 		UDelegateContainerActorVec* BulletHit = Cast<UDelegateContainerActorVec>(Blackboard->GetValueAsObject(FName("OnBulletHit")));
 		if (BulletHit)
 		{
-			BulletHit->ExecuteDelegates(actor, LatestImpactPoint);
+			BulletHit->InvokeFunctors(actor, LatestImpactPoint);
 		}
 		
 		if (PrintHitscan)
@@ -103,7 +103,7 @@ bool UShootHitscanNode::LineTraceHitscan(
 	const FVector Direction,
 	const float MaxDistance,
 	TArray<FHitResult>& Hits,
-	const bool Piercing)
+	const bool Piercing) const
 {
 	FCollisionQueryParams CollisionParams;
 

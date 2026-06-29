@@ -16,7 +16,7 @@ public:
 	virtual FString GetBlackboardKey() const PURE_VIRTUAL(UValueModifier::GetBlackboardKey, return "";);
 
 	UFUNCTION()
-	virtual uint8 GetPriority() const PURE_VIRTUAL(UValueModifier::GetPriority, return 0;); // Use uint8 max
+	virtual uint8 GetPriority() const PURE_VIRTUAL(UValueModifier::GetPriority, return MAX_uint8;);
 
 	UFUNCTION()
 	virtual FString GetModifyDescription() const PURE_VIRTUAL(UValueModifier::GetModifyDescription, return "";);

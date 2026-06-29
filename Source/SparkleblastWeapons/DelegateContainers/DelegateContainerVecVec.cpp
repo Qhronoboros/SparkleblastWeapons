@@ -3,20 +3,20 @@
 
 #include "DelegateContainerVecVec.h"
 
-void UDelegateContainerVecVec::BindFunctor(FOnDelegateVecVec functor)
+void UDelegateContainerVecVec::BindFunctor(FOnDelegateVecVec Functor)
 {
-	Delegates.Add(functor);
+	Functors.Add(Functor);
 }
 
-void UDelegateContainerVecVec::UnbindFunctor(FOnDelegateVecVec functor)
+void UDelegateContainerVecVec::UnbindFunctor(FOnDelegateVecVec Functor)
 {
-	Delegates.Remove(functor);
+	Functors.Remove(Functor);
 }
 
-void UDelegateContainerVecVec::ExecuteDelegates(FVector Vec1, FVector Vec2)
+void UDelegateContainerVecVec::InvokeFunctors(FVector Vec1, FVector Vec2)
 {
-	for (FOnDelegateVecVec Delegate : Delegates)
+	for (FOnDelegateVecVec Functor : Functors)
 	{
-		Delegate.ExecuteIfBound(Vec1, Vec2);
+		Functor.ExecuteIfBound(Vec1, Vec2);
 	}
 }

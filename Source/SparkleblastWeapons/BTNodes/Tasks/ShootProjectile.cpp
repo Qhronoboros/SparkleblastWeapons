@@ -59,7 +59,7 @@ ENodeStatus UShootProjectile::Update()
 	UDelegateContainerVecVec* BulletFired = Cast<UDelegateContainerVecVec>(Blackboard->GetValueAsObject(FName("OnBulletFired")));
 	if (BulletFired)
 	{
-		BulletFired->ExecuteDelegates(StartLocation, Direction);
+		BulletFired->InvokeFunctors(StartLocation, Direction);
 	}
 
 	return ENodeStatus::Success;

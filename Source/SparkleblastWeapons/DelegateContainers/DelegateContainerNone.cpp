@@ -3,20 +3,20 @@
 
 #include "DelegateContainerNone.h"
 
-void UDelegateContainerNone::BindFunctor(FOnDelegateNone functor)
+void UDelegateContainerNone::BindFunctor(FOnDelegateNone Functor)
 {
-	Delegates.Add(functor);
+	Functors.Add(Functor);
 }
 
-void UDelegateContainerNone::UnbindFunctor(FOnDelegateNone functor)
+void UDelegateContainerNone::UnbindFunctor(FOnDelegateNone Functor)
 {
-	Delegates.Remove(functor);
+	Functors.Remove(Functor);
 }
 
-void UDelegateContainerNone::ExecuteDelegates()
+void UDelegateContainerNone::InvokeFunctors()
 {
-	for (FOnDelegateNone Delegate : Delegates)
+	for (FOnDelegateNone Functor : Functors)
 	{
-		Delegate.ExecuteIfBound();
+		Functor.ExecuteIfBound();
 	}
 }

@@ -41,5 +41,5 @@ private:
 		const FVector Direction,
 		const float MaxDistance,
 		TArray<FHitResult>& Hits,
-		const bool Piercing);
+		const bool Piercing) const;
 };

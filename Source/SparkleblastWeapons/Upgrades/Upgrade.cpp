@@ -7,7 +7,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
 
-FString UUpgrade::GetUpgradeDescription()
+FString UUpgrade::GetUpgradeDescription() const
 {
 	FString Output = "";
 
@@ -19,7 +19,7 @@ FString UUpgrade::GetUpgradeDescription()
 	return Output;
 }
 
-void UUpgrade::TransferModifiers(UBlackboardComponent* Blackboard)
+void UUpgrade::TransferModifiers(UBlackboardComponent* Blackboard) const
 {
 	for (UValueModifier* Modifier : Modifiers)
 	{
@@ -36,11 +36,10 @@ void UUpgrade::TransferModifiers(UBlackboardComponent* Blackboard)
 	}
 }
 
-void UUpgrade::RemoveModifiers(UBlackboardComponent* Blackboard)
+void UUpgrade::RemoveModifiers(UBlackboardComponent* Blackboard) const
 {
 	for (UValueModifier* Modifier : Modifiers)
 	{
-		//Blackboard->IsValidKey(FName(Modifier->BlackboardKey));
 		// Check if Blackboard contains the key of the Modifier
 		UModificationApplier* ModificationApplier = Cast<UModificationApplier>(Blackboard->GetValueAsObject(FName(Modifier->GetBlackboardKey())));
 		if (!ModificationApplier)

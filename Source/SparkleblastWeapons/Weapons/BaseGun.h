@@ -45,18 +45,16 @@ public:
 	// Sets default values for this actor's properties
 	ABaseGun();
 
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	virtual void Tick(const float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
 	virtual void ApplyUpgrade_Implementation(UUpgrade* Upgrade) override;
 
 	UFUNCTION(BlueprintCallable)
-	virtual TSubclassOf<UUserWidget> GetCrosshair_Implementation() override;
+	virtual TSubclassOf<UUserWidget> GetCrosshair_Implementation() const override;
 
 	UFUNCTION(BlueprintCallable)
 	virtual void StartAttacking_Implementation() override;
-
 	UFUNCTION(BlueprintCallable)
 	virtual void StopAttacking_Implementation() override;
 
@@ -64,6 +62,7 @@ protected:
 	UPROPERTY(BlueprintReadWrite)
 	UBlackboardComponent* Blackboard;
 
+	// Behaviour Trees/Node Trees
 	UPROPERTY(Category = "Gun Properties", BlueprintReadOnly, EditAnywhere, Instanced)
 	UBaseNode* NodeTreeOnPressed;
 
@@ -108,9 +107,6 @@ protected:
 	UPROPERTY()
 	bool TriggerHeld = false;
 
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
 	UFUNCTION(BlueprintCallable)
 	bool SetupBlackboard(
 		UBlackboardComponent* BlackboardComponent,
@@ -118,13 +114,14 @@ protected:
 		AActor* Shooter,
 		USceneComponent* Head);
 
-	// Not UFUNCTION, because double pointer would not be possible
-	void InstantiateModificationApplier(const FName& KeyName, UModificationApplier** ModificationApplier);
+	// Not a UFUNCTION, because double pointer would not be possible
+	// Double pointer so pointer of given ModificationApplier can be replaced
+	void InstantiateModificationApplier(const FName& KeyName, UModificationApplier** ModificationApplier) const;
 
 private:
 	UPROPERTY()
 	float TimeStarted = 0.0f;
 
 	UFUNCTION()
-	void TraverseNodeTree(UBaseNode* NodeTree);
+	void TraverseNodeTree(UBaseNode* NodeTree) const;
 };

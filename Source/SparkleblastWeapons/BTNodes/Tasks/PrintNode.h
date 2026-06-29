@@ -19,5 +19,5 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere)
-	FString PrintText;
+	FString PrintText = "";
 };

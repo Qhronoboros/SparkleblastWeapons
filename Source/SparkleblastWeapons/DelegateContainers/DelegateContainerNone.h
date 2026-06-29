@@ -7,6 +7,7 @@
 
 DECLARE_DYNAMIC_DELEGATE(FOnDelegateNone);
 
+// Container for functors with no parameters
 UCLASS( BlueprintType )
 class SPARKLEBLASTWEAPONS_API UDelegateContainerNone : public UObject
 {
@@ -14,15 +15,15 @@ class SPARKLEBLASTWEAPONS_API UDelegateContainerNone : public UObject
 	
 public:
 	UFUNCTION(BlueprintCallable)
-	void BindFunctor(FOnDelegateNone functor);
+	void BindFunctor(FOnDelegateNone Functor);
 
 	UFUNCTION(BlueprintCallable)
-	void UnbindFunctor(FOnDelegateNone functor);
+	void UnbindFunctor(FOnDelegateNone Functor);
 
 	UFUNCTION(BlueprintCallable)
-	void ExecuteDelegates();
+	void InvokeFunctors();
 
 private:
 	UPROPERTY(VisibleAnywhere)
-	TArray<FOnDelegateNone> Delegates;
+	TArray<FOnDelegateNone> Functors;
 };

@@ -26,11 +26,11 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
-	FString BlackboardKey;
+	FString BlackboardKey = "";
 
 	UPROPERTY(EditAnywhere)
-	uint8 Priority;
+	uint8 Priority = 0;
 
 	UPROPERTY(EditAnywhere)
-	float ChangingValue;
+	float ChangingValue = 0.0f;
 };

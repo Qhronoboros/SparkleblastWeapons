@@ -52,7 +52,7 @@ ENodeStatus UBulletTransformCalcAccurateNode::Update()
 	return ENodeStatus::Success;
 }
 
-bool UBulletTransformCalcAccurateNode::GetLineTraceHit(UWorld* World, FVector Location, FVector Direction, float MaxDistance, FHitResult& Hit)
+bool UBulletTransformCalcAccurateNode::GetLineTraceHit(UWorld* World, FVector Location, FVector Direction, float MaxDistance, FHitResult& Hit) const
 {
 	FCollisionQueryParams CollisionParams;
 	if (!World->LineTraceSingleByChannel(Hit, Location, Location + Direction * MaxDistance, ECC_Visibility, CollisionParams)) return false;

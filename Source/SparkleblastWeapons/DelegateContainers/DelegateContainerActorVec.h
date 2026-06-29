@@ -7,6 +7,7 @@
 
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnDelegateActorVec, AActor*, Actor, FVector, Vec);
 
+// Container for functors with AActor* and Vector as parameters
 UCLASS( BlueprintType, DefaultToInstanced )
 class SPARKLEBLASTWEAPONS_API UDelegateContainerActorVec : public UObject
 {
@@ -14,15 +15,15 @@ class SPARKLEBLASTWEAPONS_API UDelegateContainerActorVec : public UObject
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void BindFunctor(FOnDelegateActorVec functor);
+	void BindFunctor(FOnDelegateActorVec Functor);
 
 	UFUNCTION(BlueprintCallable)
-	void UnbindFunctor(FOnDelegateActorVec functor);
+	void UnbindFunctor(FOnDelegateActorVec Functor);
 
 	UFUNCTION(BlueprintCallable)
-	void ExecuteDelegates(AActor* Actor, FVector Vec);
+	void InvokeFunctors(AActor* Actor, FVector Vec);
 
 private:
 	UPROPERTY(VisibleAnywhere)
-	TArray<FOnDelegateActorVec> Delegates;
+	TArray<FOnDelegateActorVec> Functors;
 };

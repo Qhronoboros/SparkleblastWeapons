@@ -14,12 +14,6 @@ ABaseGun::ABaseGun()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-// Called when the game starts or when spawned
-void ABaseGun::BeginPlay()
-{
-	Super::BeginPlay();
-}
-
 bool ABaseGun::SetupBlackboard(
 	UBlackboardComponent* BlackboardComponent,
 	USceneComponent* Muzzle,
@@ -71,7 +65,7 @@ bool ABaseGun::SetupBlackboard(
 	return false;
 }
 
-void ABaseGun::InstantiateModificationApplier(const FName& KeyName, UModificationApplier** ModificationApplier)
+void ABaseGun::InstantiateModificationApplier(const FName& KeyName, UModificationApplier** ModificationApplier) const
 {
 	// Checking if key exists in Blackboard
 	if ((uint16)Blackboard->GetKeyID(KeyName) != MAX_uint16)
@@ -81,7 +75,7 @@ void ABaseGun::InstantiateModificationApplier(const FName& KeyName, UModificatio
 	}
 }
 
-void ABaseGun::TraverseNodeTree(UBaseNode* NodeTree)
+void ABaseGun::TraverseNodeTree(UBaseNode* NodeTree) const
 {
 	if (NodeTree == nullptr) return;
 
@@ -127,7 +121,7 @@ void ABaseGun::ApplyUpgrade_Implementation(UUpgrade* Upgrade)
 	Upgrades.Add(Upgrade);
 }
 
-TSubclassOf<UUserWidget> ABaseGun::GetCrosshair_Implementation()
+TSubclassOf<UUserWidget> ABaseGun::GetCrosshair_Implementation() const
 {
 	return Crosshair;
 }

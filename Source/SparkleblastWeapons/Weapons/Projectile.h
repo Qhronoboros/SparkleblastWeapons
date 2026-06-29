@@ -22,5 +22,5 @@ class SPARKLEBLASTWEAPONS_API IProjectile
 
 public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void Constructor(float AttackDamage, float Speed, bool Piercing, AActor* Shooter);
+	void Constructor(const float AttackDamage, const float Speed, const bool Piercing, AActor* Shooter);
 };
