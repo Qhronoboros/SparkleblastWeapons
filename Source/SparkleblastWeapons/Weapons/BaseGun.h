@@ -101,7 +101,11 @@ protected:
 	UPROPERTY()
 	TArray<UUpgrade*> Upgrades;
 
-	// Stat Modifications
+	/*
+	Stat Modifications
+	Initially null pointers, but actual objects will be added using InstantiateModificationApplier
+	ModificationAppliers are put into the blackboard for easier accessibility
+	*/
 	UPROPERTY()
 	UModificationApplier* BulletSpreadMod;
 
@@ -133,7 +137,7 @@ protected:
 	/*
 	Not a UFUNCTION, because double pointer would otherwise not be possible
 	It is a double pointer so the pointer of the given ModificationApplier
-	can be replaced with the pointer of a new object
+	can be replaced with the pointer of a new ModificationApplier
 	*/
 	void InstantiateModificationApplier(const FName& KeyName, UModificationApplier** ModificationApplier) const;
 
