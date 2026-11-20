@@ -10,5 +10,5 @@ FString UValueModifierDivide::GetModifyDescription() const
 
 float UValueModifierDivide::ApplyMod(float Value) const
 {
-	return Value / ChangingValue;
+	return ChangingValue != 0.0f ? Value / ChangingValue : ChangingValue;
 }
