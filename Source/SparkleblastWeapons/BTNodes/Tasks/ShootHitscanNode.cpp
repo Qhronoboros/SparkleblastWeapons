@@ -8,7 +8,6 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-// Trace a ray and deal damage to targets hit by ray
 ENodeStatus UShootHitscanNode::Update()
 {
 	UWorld* World = Blackboard->GetValueAsObject(FName("SelfWeapon"))->GetWorld();

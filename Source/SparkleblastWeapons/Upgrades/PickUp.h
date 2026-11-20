@@ -13,6 +13,7 @@ class SPARKLEBLASTWEAPONS_API APickUp : public AActor
 	GENERATED_BODY()
 	
 public:	
+	// The upgrade that is attached to the PickUp
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Instanced)
 	UUpgrade* Upgrade;
 };

@@ -35,7 +35,7 @@ public:
 	TSubclassOf<UUserWidget> GetCrosshair();
 	virtual TSubclassOf<UUserWidget> GetCrosshair_Implementation() const { return NULL; };
 
-	// When Attack button held
+	// When Attack button pressed
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void StartAttacking();
 	virtual void StartAttacking_Implementation() { };

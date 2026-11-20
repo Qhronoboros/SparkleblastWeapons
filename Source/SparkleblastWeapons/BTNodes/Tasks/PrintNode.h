@@ -15,6 +15,7 @@ class SPARKLEBLASTWEAPONS_API UPrintNode : public UBaseNode
 	GENERATED_BODY()
 	
 protected:
+	// Prints text on screen
 	virtual ENodeStatus Update() override;
 
 private:

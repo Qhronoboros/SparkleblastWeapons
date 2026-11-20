@@ -15,8 +15,16 @@ class SPARKLEBLASTWEAPONS_API USelectorNode : public UCompositeNode
 	GENERATED_BODY()
 
 protected:
+    /*
+    Process through all children until one succeeds or is still running
+    and returns the corresponding status.
+    Starts with the last processed child unless reset
+    Returns the Failed status if all children fail
+    */
     virtual ENodeStatus Update() override;
 
+    // Reset currentChild to 0
     virtual void OnEnter() override;
+    // Reset currentChild to 0
     virtual void OnExit() override;
 };

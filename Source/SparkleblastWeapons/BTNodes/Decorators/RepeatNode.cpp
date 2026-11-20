@@ -6,9 +6,6 @@
 
 ENodeStatus URepeatNode::Update()
 {
-	//int ActualRepeat = RepeatBlackboardKey == "" ?
-	//	DefaultRepeat : Blackboard->GetValueAsInt(FName(RepeatBlackboardKey));
-
 	int ActualRepeat = RepeatAmount;
 
 	// Modify Repeat

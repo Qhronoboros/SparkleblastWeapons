@@ -7,19 +7,18 @@
 #include "../../Upgrades/ModificationApplier.h"
 #include "CooldownNode.generated.h"
 
-//class FBlackboardKeySelector;
-/**
- * 
- */
 UCLASS()
 class SPARKLEBLASTWEAPONS_API UCooldownNode : public UDecoratorNode
 {
 	GENERATED_BODY()
 	
 public:
+	// Resets TimeStarted and child
 	virtual void Reset() override;
 
 protected:
+	/* Processes child over a certain time
+	returns Running state when not processing child */
 	virtual ENodeStatus Update() override;
 
 private:
@@ -27,12 +26,15 @@ private:
 	UPROPERTY(EditAnywhere)
 	UCurveFloat* CooldownCurve;
 
+	// Blackboard key for Modification Applier
 	UPROPERTY(EditAnywhere)
 	FName FrequencyBlackboardKey = FName("FireRate");
 
+	// Default is used when CooldownCurve is not set
 	UPROPERTY(EditAnywhere)
 	float DefaultDuration = 1.0f;
 
+	// Gets set to time when child gets processed
 	UPROPERTY(VisibleAnywhere)
 	float TimeStarted = -INFINITY;
 };

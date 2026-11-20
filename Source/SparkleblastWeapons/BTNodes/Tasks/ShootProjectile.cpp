@@ -30,8 +30,6 @@ ENodeStatus UShootProjectile::Update()
 		return ENodeStatus::Failed;
 	}
 
-	//float Damage = Blackboard->GetValueAsFloat(FName("BulletDamage"));
-	//float Speed = Blackboard->GetValueAsFloat(FName("ProjectileSpeed"));
 	bool Piercing = Blackboard->GetValueAsBool(FName("Piercing"));
 
 	// Modify Damage

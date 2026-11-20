@@ -16,14 +16,21 @@ class SPARKLEBLASTWEAPONS_API UBulletTransformCalcAccurateNode : public UBaseNod
 	GENERATED_BODY()
 
 protected:
+	/*
+	Set ShootLocation and ShootDirection in Blackboard
+	ShootLocation = HeadLocation
+	ShootDirection = a vector from MuzzleLocation to potential target
+	*/
 	virtual ENodeStatus Update() override;
 
 	bool GetLineTraceHit(UWorld* World, FVector location, FVector direction, float MaxDistance, FHitResult& hit) const;
 
 private:
+	// Blackboard key for Modification Applier
 	UPROPERTY(EditAnywhere)
 	FName BulletSpreadBlackboardKey = FName("BulletSpread");
 
+	// Base size of bullet spread cone in radians
 	UPROPERTY(EditAnywhere)
 	float BulletSpread = 0.0f;
 };

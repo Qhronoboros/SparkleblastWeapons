@@ -27,18 +27,23 @@ class SPARKLEBLASTWEAPONS_API ABaseGun : public AActor, public IWeapon
 
 public:
 	// Delegates
+	// When fire button gets pressed
 	UPROPERTY(BlueprintAssignable)
 	FOnDelegateMultiNone OnFireHeld;
 
+	// When fire button gets released
 	UPROPERTY(BlueprintAssignable)
 	FOnDelegateMultiNone OnFireReleased;
 
+	// When gun fires bullets
 	UPROPERTY(BlueprintAssignable)
 	FOnDelegateMultiVecVec OnGunFired;
 
+	// When a projectile or a hitscan gets fired (can invoke multiple times if repeating)
 	UPROPERTY(BlueprintReadOnly)
 	UDelegateContainerVecVec* OnBulletFired;
 
+	// When a hitscan hits a target (gets invoked per target)
 	UPROPERTY(BlueprintReadOnly)
 	UDelegateContainerActorVec* OnBulletHit;
 
@@ -47,14 +52,19 @@ public:
 
 	virtual void Tick(const float DeltaTime) override;
 
+	// Transfers the upgrade modifiers to the blackboard and adds upgrade to the upgrades array
 	UFUNCTION(BlueprintCallable)
 	virtual void ApplyUpgrade_Implementation(UUpgrade* Upgrade) override;
 
+	// Returns crosshair of gun
 	UFUNCTION(BlueprintCallable)
 	virtual TSubclassOf<UUserWidget> GetCrosshair_Implementation() const override;
 
+	// Sets TriggerHeld to true, invokes InFireHeld, and starts traversing NodeTreeOnPressed
 	UFUNCTION(BlueprintCallable)
 	virtual void StartAttacking_Implementation() override;
+
+	// Sets TriggerHeld to false, invokes InFireReleased, and starts traversing NodeTreeOnRelease
 	UFUNCTION(BlueprintCallable)
 	virtual void StopAttacking_Implementation() override;
 
@@ -63,21 +73,27 @@ protected:
 	UBlackboardComponent* Blackboard;
 
 	// Behaviour Trees/Node Trees
+	// Gets traversed when fire button is pressed
 	UPROPERTY(Category = "Gun Properties", BlueprintReadOnly, EditAnywhere, Instanced)
 	UBaseNode* NodeTreeOnPressed;
 
+	// Gets traversed when fire button is held
 	UPROPERTY(Category = "Gun Properties", BlueprintReadOnly, EditAnywhere, Instanced)
 	UBaseNode* NodeTreeOnHeld;
 
+	// Gets traversed when fire button is released
 	UPROPERTY(Category = "Gun Properties", BlueprintReadOnly, EditAnywhere, Instanced)
 	UBaseNode* NodeTreeOnRelease;
 
+	// Crosshair widget that gets shown when gun is equipped
 	UPROPERTY(Category = "Gun Properties", BlueprintReadOnly, EditAnywhere)
 	TSubclassOf<UUserWidget> Crosshair;
 
+	// Shoot FMOD event that get plays when gun fires
 	UPROPERTY(Category = "Gun Properties", BlueprintReadOnly, EditAnywhere)
 	UFMODEvent* ShootFMODEvent;
 
+	// Camera shake that occurs when gun fires
 	UPROPERTY(Category = "Gun Properties", BlueprintReadOnly, EditAnywhere)
 	TSubclassOf<UCameraShakeBase> CameraShake;
 	
@@ -114,8 +130,11 @@ protected:
 		AActor* Shooter,
 		USceneComponent* Head);
 
-	// Not a UFUNCTION, because double pointer would not be possible
-	// Double pointer so pointer of given ModificationApplier can be replaced
+	/*
+	Not a UFUNCTION, because double pointer would otherwise not be possible
+	It is a double pointer so the pointer of the given ModificationApplier
+	can be replaced with the pointer of a new object
+	*/
 	void InstantiateModificationApplier(const FName& KeyName, UModificationApplier** ModificationApplier) const;
 
 private:

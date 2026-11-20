@@ -10,17 +10,20 @@
 class UBlackboardComponent;
 class UBlackboardData;
 
+// Not used by itself, but used for inheritance
 UCLASS(EditInlineNew, BlueprintType, abstract)
 class SPARKLEBLASTWEAPONS_API UBaseNode : public UDataAsset
 {
 	GENERATED_BODY()
 
 public:
+	// Set given blackboard for itself
 	UFUNCTION(BlueprintCallable)
 	virtual void SetupBlackboard(UBlackboardComponent* NewBlackboard);
 
 	virtual void Reset() { };
 
+	// Takes care of calling OnEnter, Update, and OnExit
 	UFUNCTION(BlueprintCallable)
 	virtual ENodeStatus Process();
 

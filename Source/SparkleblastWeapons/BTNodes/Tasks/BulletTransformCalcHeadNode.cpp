@@ -4,9 +4,6 @@
 #include "BulletTransformCalcHeadNode.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
-// Set ShootLocation and ShootDirection in Blackboard
-// ShootLocation = HeadLocation
-// ShootDirection = HeadDirection
 ENodeStatus UBulletTransformCalcHeadNode::Update()
 {
 	Blackboard->SetValueAsVector(FName("ShootLocation"),

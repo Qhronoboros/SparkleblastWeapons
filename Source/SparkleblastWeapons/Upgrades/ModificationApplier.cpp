@@ -26,5 +26,3 @@ void UModificationApplier::RemoveModifier(UValueModifier* Modifier)
 {
 	Modifiers.Remove(Modifier);
 }
-
-

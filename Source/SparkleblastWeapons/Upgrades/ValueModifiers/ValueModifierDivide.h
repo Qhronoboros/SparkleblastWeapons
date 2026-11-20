@@ -25,12 +25,15 @@ public:
 	virtual float ApplyMod(float Value) const override;
 
 private:
+	// The BlackboardKey the ValueModifier should add/remove itself to
 	UPROPERTY(EditAnywhere)
 	FString BlackboardKey = "";
 
+	// Priority when ValueModifiers get added to a ModificationApplier (lowest to highest)
 	UPROPERTY(EditAnywhere)
 	uint8 Priority = 0;
 
+	// The value used for modification
 	UPROPERTY(EditAnywhere)
 	float ChangingValue = 0.0f;
 };

@@ -5,9 +5,6 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
-// Set ShootLocation and ShootDirection in Blackboard
-// ShootLocation = HeadLocation
-// ShootDirection = a vector from MuzzleLocation to potential target
 ENodeStatus UBulletTransformCalcAccurateNode::Update()
 {
 	UWorld* World = Blackboard->GetValueAsObject(FName("SelfWeapon"))->GetWorld();

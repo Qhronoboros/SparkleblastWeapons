@@ -4,9 +4,7 @@
 #include "BulletTransformCalcMuzzleNode.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
-// Set ShootLocation and ShootDirection in Blackboard
-// ShootLocation = MuzzleLocation
-// ShootDirection = MuzzleDirection
+
 ENodeStatus UBulletTransformCalcMuzzleNode::Update()
 {
 	Blackboard->SetValueAsVector(FName("ShootLocation"), 
